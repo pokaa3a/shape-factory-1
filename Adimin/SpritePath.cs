@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpritePath : MonoBehaviour
+public class SpritePath
 {
-    // Start is called before the first frame update
-    void Start()
+    public class UI
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public class Map
     {
-        
+        public const string tile = "Sprites/Map/Tile";
     }
 }
