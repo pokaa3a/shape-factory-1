@@ -29,4 +29,11 @@ public class Utils
             sizeWH.x / sprRend.size.x,
             sizeWH.y / sprRend.size.y);
     }
+
+    public static void SetParent(GameObject child, GameObject parent)
+    {
+        child.transform.SetParent(parent.transform);
+        child.transform.localPosition = Vector2.zero;
+        child.transform.localScale = new Vector3(1, 1, 1);
+    }
 }

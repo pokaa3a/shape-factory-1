@@ -7,6 +7,7 @@ public partial class Tile
     public Vector2Int rc { get; private set; }
     public GameObject gameObject;
     public static GameObject mapObject;
+    public Module module;
 }
 
 public partial class Tile
@@ -27,5 +28,11 @@ public partial class Tile
         Utils.SetSprite(gameObject, SpritePath.Map.tile);
         Utils.SetSpriteSortingOrder(gameObject, 1);
         Utils.SetScale(gameObject, Map.tileWH);
+    }
+
+    public void AddModuleToTile(Module module)
+    {
+        this.module = module;
+        Utils.SetParent(module.gameObject, gameObject);
     }
 }

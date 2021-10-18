@@ -55,6 +55,7 @@ public partial class Map
 
     public void CreateMap()
     {
+        // Create tiles
         for (int r = 0; r < rows; ++r)
         {
             for (int c = 0; c < cols; ++c)
@@ -63,6 +64,34 @@ public partial class Map
                 tiles.Add(tile);
             }
         }
+
+        MapConfig config = MapConfig.LoadMapConfigFromScript();
+        MakeModulesByConfig(config);
+    }
+
+    private void MakeModulesByConfig(MapConfig config)
+    {
+        foreach (ModuleInfo info in config.modules)
+        {
+            switch (info.name)
+            {
+                case Source.name:
+                    SourceInfo sourceInfo = (SourceInfo)info;
+                    Source source = new Source(sourceInfo.rc, sourceInfo.direction, sourceInfo.elementType);
+                    break;
+                case Target.name:
+                    TargetInfo targetInfo = (TargetInfo)info;
+                    Target target = new Target(targetInfo.rc);
+                    break;
+                default: break;
+            }
+        }
+    }
+
+    public Tile GetTile(Vector2Int rc)
+    {
+        Assert.IsTrue(InsideMap(rc), $"[GetTile] rc ({rc}) is not inside the map");
+        return tiles[rc.x * cols + rc.y];
     }
 
     public static bool InsideMap(Vector2Int rc)
