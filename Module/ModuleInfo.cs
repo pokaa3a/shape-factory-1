@@ -11,7 +11,7 @@ public class ModuleInfo
 public class SourceInfo : ModuleInfo
 {
     public ElementType elementType;
-    public ModuleDirection direction;
+    public Direction direction;
 }
 
 public class TargetInfo : ModuleInfo

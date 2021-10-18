@@ -19,7 +19,7 @@ public partial class MapConfig
         SourceInfo info0 = new SourceInfo();
         info0.name = Source.name;
         info0.rc = new Vector2Int(0, 0);
-        info0.direction = ModuleDirection.Up;
+        info0.direction = Direction.Up;
         info0.elementType = ElementType.Circle;
 
         config.modules.Add((ModuleInfo)info0);
@@ -28,7 +28,7 @@ public partial class MapConfig
         SourceInfo info1 = new SourceInfo();
         info1.name = Source.name;
         info1.rc = new Vector2Int(0, 1);
-        info1.direction = ModuleDirection.Right;
+        info1.direction = Direction.Right;
         info1.elementType = ElementType.Square;
 
         config.modules.Add((ModuleInfo)info1);

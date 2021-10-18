@@ -5,15 +5,51 @@ using UnityEngine;
 public partial class Source : Module
 {
     public const string name = "Source";
+    public const float spawnPeriod = 2f;    // sec
+    public ElementType elementType;
+    public Direction direction;
     private GameObject directionObject;
     private GameObject elementObject;
+    private Component component;
+}
+
+public partial class Source : Module
+{
+    public partial class Component : MonoBehaviour
+    {
+        private Source source;
+        private float spawnPeriod;
+        private float nextSpawnTime;
+
+        public void Initialize(Source source, float spawnPeriod)
+        {
+            this.source = source;
+            this.spawnPeriod = spawnPeriod;
+            this.nextSpawnTime = Time.time;
+        }
+
+        void Update()
+        {
+            if (Time.time >= nextSpawnTime)
+            {
+                source.Spawn();
+                nextSpawnTime = Time.time + spawnPeriod;
+            }
+        }
+    }
 }
 
 public partial class Source : Module
 {
     public Source(SourceInfo info) : base(info.rc)
     {
+        this.direction = info.direction;
+        this.elementType = info.elementType;
+
         gameObject.name = Source.name;
+        component = gameObject.AddComponent<Component>();
+        component.Initialize(this, Source.spawnPeriod);
+
         Utils.SetSprite(gameObject, SpritePath.Module.source);
         Utils.SetSpriteSortingOrder(gameObject, 2);
 
@@ -21,13 +57,13 @@ public partial class Source : Module
         Utils.SetParent(directionObject, gameObject);
         switch (info.direction)
         {
-            case ModuleDirection.Up:
+            case Direction.Up:
                 Utils.SetSprite(directionObject, SpritePath.Module.sourceUp); break;
-            case ModuleDirection.Down:
+            case Direction.Down:
                 Utils.SetSprite(directionObject, SpritePath.Module.sourceDown); break;
-            case ModuleDirection.Left:
+            case Direction.Left:
                 Utils.SetSprite(directionObject, SpritePath.Module.sourceLeft); break;
-            case ModuleDirection.Right:
+            case Direction.Right:
                 Utils.SetSprite(directionObject, SpritePath.Module.sourceRight); break;
             default: break;
         }
@@ -48,5 +84,10 @@ public partial class Source : Module
             default: break;
         }
         Utils.SetSpriteSortingOrder(elementObject, 4);
+    }
+
+    public void Spawn()
+    {
+        Element e = new Element(elementType, rc, direction);
     }
 }

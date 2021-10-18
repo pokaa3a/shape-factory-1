@@ -7,6 +7,14 @@ using UnityEngine.Assertions;
 // xy: World space (2.31*2 x 5*2)
 // rc: Row Column
 
+public enum Direction
+{
+    Up,
+    Down,
+    Left,
+    Right
+}
+
 public partial class Map
 {
     public const int rows = 8;
@@ -100,8 +108,8 @@ public partial class Map
     public static bool InsideMap(Vector2 xy)
     {
         Vector2 topRightTilexy = new Vector2(
-            bottomLeftTileXy.x + tileWH.x * cols,
-            bottomLeftTileXy.y + tileWH.y * rows);
+            bottomLeftTileXy.x + tileWH.x * (cols - 1),
+            bottomLeftTileXy.y + tileWH.y * (rows - 1));
         return xy.x > bottomLeftTileXy.x - tileWH.x * 0.5f &&
             xy.x < topRightTilexy.x + tileWH.x * 0.5f &&
             xy.y > bottomLeftTileXy.y - tileWH.y * 0.5f &&
