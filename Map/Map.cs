@@ -76,12 +76,10 @@ public partial class Map
             switch (info.name)
             {
                 case Source.name:
-                    SourceInfo sourceInfo = (SourceInfo)info;
-                    Source source = new Source(sourceInfo.rc, sourceInfo.direction, sourceInfo.elementType);
+                    Source source = new Source((SourceInfo)info);
                     break;
                 case Target.name:
-                    TargetInfo targetInfo = (TargetInfo)info;
-                    Target target = new Target(targetInfo.rc);
+                    Target target = new Target((TargetInfo)info);
                     break;
                 default: break;
             }

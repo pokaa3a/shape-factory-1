@@ -11,7 +11,7 @@ public partial class Source : Module
 
 public partial class Source : Module
 {
-    public Source(Vector2Int rc, ModuleDirection direction, ElementType type) : base(rc)
+    public Source(SourceInfo info) : base(info.rc)
     {
         gameObject.name = Source.name;
         Utils.SetSprite(gameObject, SpritePath.Module.source);
@@ -19,7 +19,7 @@ public partial class Source : Module
 
         directionObject = new GameObject("Direction");
         Utils.SetParent(directionObject, gameObject);
-        switch (direction)
+        switch (info.direction)
         {
             case ModuleDirection.Up:
                 Utils.SetSprite(directionObject, SpritePath.Module.sourceUp); break;
@@ -35,7 +35,7 @@ public partial class Source : Module
 
         elementObject = new GameObject("Element");
         Utils.SetParent(elementObject, gameObject);
-        switch (type)
+        switch (info.elementType)
         {
             case ElementType.Circle:
                 Utils.SetSprite(elementObject, SpritePath.Element.circle); break;

@@ -38,6 +38,11 @@ public partial class MapConfig
         info2.name = Target.name;
         info2.rc = new Vector2Int(5, 4);
 
+        Target.ElementConfig ec1 = new Target.ElementConfig(Vector2.up, ElementType.Triangle);
+        info2.elements.Add(ec1);
+        Target.ElementConfig ec2 = new Target.ElementConfig(Vector2.down, ElementType.Square);
+        info2.elements.Add(ec2);
+
         config.modules.Add((ModuleInfo)info2);
 
 

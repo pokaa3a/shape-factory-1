@@ -16,5 +16,5 @@ public class SourceInfo : ModuleInfo
 
 public class TargetInfo : ModuleInfo
 {
-
+    public List<Target.ElementConfig> elements = new List<Target.ElementConfig>();
 }
