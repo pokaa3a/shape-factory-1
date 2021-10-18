@@ -24,19 +24,19 @@ public partial class MapConfig
 
         config.modules.Add((ModuleInfo)info0);
 
-        // (0, 1): Source, right, square
+        // (1, 1): Source, right, square
         SourceInfo info1 = new SourceInfo();
         info1.name = Source.name;
-        info1.rc = new Vector2Int(0, 1);
+        info1.rc = new Vector2Int(1, 1);
         info1.direction = Direction.Right;
         info1.elementType = ElementType.Square;
 
         config.modules.Add((ModuleInfo)info1);
 
-        // (5, 4): Target
+        // (1, 4): Target
         TargetInfo info2 = new TargetInfo();
         info2.name = Target.name;
-        info2.rc = new Vector2Int(5, 4);
+        info2.rc = new Vector2Int(1, 4);
 
         Target.ElementConfig ec1 = new Target.ElementConfig(Vector2.up, ElementType.Triangle);
         info2.elements.Add(ec1);

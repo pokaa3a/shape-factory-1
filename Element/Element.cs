@@ -70,6 +70,14 @@ public partial class Element
             if (!Map.InsideMap(element.xy))
             {
                 Destroy(gameObject);
+                return;
+            }
+
+            Vector2Int rc = Map.XYtoRC(element.xy);
+            if (!Map.Instance.GetTile(rc).ElementHits(element))
+            {
+                Destroy(gameObject);
+                return;
             }
         }
     }

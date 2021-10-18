@@ -125,9 +125,8 @@ public partial class Map
 
     public static Vector2Int XYtoRC(Vector2 xy)
     {
-        int c = (int)((xy.x - bottomLeftTileXy.x - tileWH.x * 0.5f) / tileWH.x);
-        int r = (int)((xy.y - bottomLeftTileXy.y - tileWH.y * 0.5f) / tileWH.y);
+        int c = (int)((xy.x - bottomLeftTileXy.x + tileWH.x * 0.5f) / tileWH.x);
+        int r = (int)((xy.y - bottomLeftTileXy.y + tileWH.y * 0.5f) / tileWH.y);
         return new Vector2Int(r, c);
     }
-
 }

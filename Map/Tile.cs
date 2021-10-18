@@ -35,4 +35,11 @@ public partial class Tile
         this.module = module;
         Utils.SetParent(module.gameObject, gameObject);
     }
+
+    public bool ElementHits(Element element)
+    {
+        if (module is Target) return false;
+
+        return true;
+    }
 }
