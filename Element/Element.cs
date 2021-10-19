@@ -12,10 +12,8 @@ public enum ElementType
 
 public partial class Element
 {
-    public const float movingSpeed = 1f;
     public ElementType type;
     public GameObject gameObject;
-    private Component component;
 }
 
 public partial class Element
@@ -27,70 +25,19 @@ public partial class Element
         set
         {
             _xy = value;
-            gameObject.transform.position = _xy;
+            gameObject.transform.localPosition = _xy;
         }
     }
 }
 
 public partial class Element
 {
-    public class Component : MonoBehaviour
-    {
-        public Direction direction;
-        public float speed;
-        public Element element;
-
-        public void Initialize(Element element, Direction direction, float speed)
-        {
-            this.element = element;
-            this.direction = direction;
-            this.speed = speed;
-        }
-
-        void FixedUpdate()
-        {
-            switch (direction)
-            {
-                case Direction.Up:
-                    element.xy += Vector2.up * speed * Time.deltaTime;
-                    break;
-                case Direction.Down:
-                    element.xy += Vector2.down * speed * Time.deltaTime;
-                    break;
-                case Direction.Left:
-                    element.xy += Vector2.left * speed * Time.deltaTime;
-                    break;
-                case Direction.Right:
-                    element.xy += Vector2.right * speed * Time.deltaTime;
-                    break;
-                default:
-                    break;
-            }
-
-            if (!Map.InsideMap(element.xy))
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            Vector2Int rc = Map.XYtoRC(element.xy);
-            if (!Map.Instance.GetTile(rc).ElementHits(element))
-            {
-                Destroy(gameObject);
-                return;
-            }
-        }
-    }
-}
-
-public partial class Element
-{
-    public Element(ElementType type, Vector2Int rc, Direction direction)
+    public Element(ElementType type)
     {
         this.type = type;
         gameObject = new GameObject();
-        component = gameObject.AddComponent<Component>();
-        component.Initialize(this, direction, Element.movingSpeed);
+        // component = gameObject.AddComponent<Component>();
+        // component.Initialize(this, direction, Element.movingSpeed);
         switch (type)
         {
             case ElementType.Circle:
@@ -113,7 +60,5 @@ public partial class Element
                 break;
         }
         Utils.SetSpriteSortingOrder(gameObject, 2);
-
-        xy = Map.RCtoXY(rc);
     }
 }

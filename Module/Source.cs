@@ -88,6 +88,6 @@ public partial class Source : Module
 
     public void Spawn()
     {
-        Element e = new Element(elementType, rc, direction);
+        ElementCarrier ec = new ElementCarrier(elementType, rc, direction);
     }
 }

@@ -36,7 +36,7 @@ public partial class Tile
         Utils.SetParent(module.gameObject, gameObject);
     }
 
-    public bool ElementHits(Element element)
+    public bool ElementHits(ElementCarrier elementCarrier)
     {
         if (module is Target) return false;
 
