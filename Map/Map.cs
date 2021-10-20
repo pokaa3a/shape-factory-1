@@ -81,13 +81,16 @@ public partial class Map
     {
         foreach (ModuleInfo info in config.modules)
         {
-            switch (info.name)
+            switch (info)
             {
-                case Source.name:
-                    Source source = new Source((SourceInfo)info);
+                case SourceInfo sourceInfo:
+                    Source source = new Source(sourceInfo);
                     break;
-                case Target.name:
-                    Target target = new Target((TargetInfo)info);
+                case TargetInfo targetInfo:
+                    Target target = new Target(targetInfo);
+                    break;
+                case MirrorInfo mirrorInfo:
+                    Mirror mirror = new Mirror(mirrorInfo);
                     break;
                 default: break;
             }

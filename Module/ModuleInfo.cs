@@ -18,3 +18,18 @@ public class TargetInfo : ModuleInfo
 {
     public List<Target.ElementConfig> elements = new List<Target.ElementConfig>();
 }
+
+public class MirrorInfo : ModuleInfo
+{
+    public MirrorPose pose;
+}
+
+public class MergeInfo : ModuleInfo
+{
+
+}
+
+public class SplitInfo : ModuleInfo
+{
+
+}

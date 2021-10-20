@@ -45,6 +45,12 @@ public partial class MapConfig
 
         config.modules.Add((ModuleInfo)info2);
 
+        // (4, 0): Mirror
+        MirrorInfo info3 = new MirrorInfo();
+        info3.rc = new Vector2Int(4, 0);
+        info3.pose = MirrorPose.TopRightBotLeft;
+
+        config.modules.Add((ModuleInfo)info3);
 
         return config;
     }

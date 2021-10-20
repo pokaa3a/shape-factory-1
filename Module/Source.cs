@@ -90,4 +90,9 @@ public partial class Source : Module
     {
         ElementCarrier ec = new ElementCarrier(elementType, rc, direction);
     }
+
+    // public override bool ElementHits(ElementCarrier elementCarrier)
+    // {
+    //     return true;
+    // }
 }

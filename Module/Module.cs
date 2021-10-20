@@ -16,4 +16,11 @@ public partial class Module
         gameObject = new GameObject("Module");
         Map.Instance.GetTile(rc).AddModuleToTile(this);
     }
+
+    // return true: keep element carrier alive
+    // return false: destroy element carrier
+    public virtual bool ElementHits(ElementCarrier elementCarrier)
+    {
+        return false;
+    }
 }

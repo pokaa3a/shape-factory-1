@@ -25,6 +25,15 @@ public class SpritePath
 
         // Target
         public const string target = "Sprites/Module/Target";
+
+        // Mirror
+        public const string mirror = "Sprites/Module/Mirror";
+
+        // Merge
+        public const string merge = "Sprites/Module/Merge";
+
+        // Split
+        public const string split = "Sprites/Module/Split";
     }
 
     public class Element

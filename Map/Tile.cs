@@ -38,8 +38,7 @@ public partial class Tile
 
     public bool ElementHits(ElementCarrier elementCarrier)
     {
-        if (module is Target) return false;
-
-        return true;
+        if (module == null) return true;
+        return module.ElementHits(elementCarrier);
     }
 }
