@@ -36,9 +36,9 @@ public partial class Tile
         Utils.SetParent(module.gameObject, gameObject);
     }
 
-    public bool ElementHits(ElementCarrier elementCarrier)
+    public CarrierTodo AcknowledgeTile(ElementCarrier elementCarrier)
     {
-        if (module == null) return true;
-        return module.ElementHits(elementCarrier);
+        if (module == null) return CarrierTodo.Reveal;
+        return module.AcknowledgeModule(elementCarrier);
     }
 }

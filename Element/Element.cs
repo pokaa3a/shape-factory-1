@@ -28,6 +28,18 @@ public partial class Element
             gameObject.transform.localPosition = _xy;
         }
     }
+
+    private bool _enabled = false;
+    public bool enabled
+    {
+        get => _enabled;
+        set
+        {
+            _enabled = value;
+            SpriteRenderer sprRender = gameObject.GetComponent<SpriteRenderer>();
+            if (sprRender != null) sprRender.enabled = _enabled;
+        }
+    }
 }
 
 public partial class Element

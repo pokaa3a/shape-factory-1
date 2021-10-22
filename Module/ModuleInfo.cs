@@ -26,10 +26,10 @@ public class MirrorInfo : ModuleInfo
 
 public class MergeInfo : ModuleInfo
 {
-
+    public Direction direction;
 }
 
 public class SplitInfo : ModuleInfo
 {
-
+    public Direction direction;
 }

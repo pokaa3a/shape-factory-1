@@ -5,8 +5,8 @@ using UnityEngine.Assertions;
 
 public partial class ElementCarrier
 {
-    public const float movingSpeed = 1f;
     public const float patternStep = 0.08f;
+    public Direction direction;
     public GameObject gameObject;
     private Component component;
     private List<Element> elements = new List<Element>();
@@ -25,14 +25,17 @@ public partial class ElementCarrier
         }
     }
 
-    private Direction _direction;
-    public Direction direction
+    private bool _enabled = false;
+    public bool enabled
     {
-        get { return _direction; }
+        get => _enabled;
         set
         {
-            _direction = value;
-            component.direction = _direction;
+            _enabled = value;
+            foreach (Element e in elements)
+            {
+                if (e != null) e.enabled = _enabled;
+            }
         }
     }
 
@@ -138,38 +141,30 @@ public partial class ElementCarrier
 
         void FixedUpdate()
         {
-            Vector2Int rcBefore = Map.XYtoRC(elementCarrier.xy);
-            switch (direction)
-            {
-                case Direction.Up:
-                    elementCarrier.xy += Vector2.up * movingSpeed * Time.deltaTime;
-                    break;
-                case Direction.Down:
-                    elementCarrier.xy += Vector2.down * movingSpeed * Time.deltaTime;
-                    break;
-                case Direction.Left:
-                    elementCarrier.xy += Vector2.left * movingSpeed * Time.deltaTime;
-                    break;
-                case Direction.Right:
-                    elementCarrier.xy += Vector2.right * movingSpeed * Time.deltaTime;
-                    break;
-                default:
-                    break;
-            }
-
             if (!Map.InsideMap(elementCarrier.xy))
             {
-                Destroy(gameObject);
+                UnityEngine.Object.Destroy(gameObject);
+                ElementRunner.Instance.RemoveCarrier(elementCarrier);
                 return;
             }
 
-            Vector2Int rc = Map.XYtoRC(elementCarrier.xy);
-            if (rc != rcBefore)
+            if (ElementRunner.Instance.firstFrame)
             {
-                if (!Map.Instance.GetTile(rc).ElementHits(elementCarrier))
+                Vector2Int rc = Map.XYtoRC(elementCarrier.xy);
+                CarrierTodo todo = Map.Instance.GetTile(rc).AcknowledgeTile(elementCarrier);
+                if (todo == CarrierTodo.Destroy)
                 {
-                    Destroy(gameObject);
+                    UnityEngine.Object.Destroy(gameObject);
+                    ElementRunner.Instance.RemoveCarrier(elementCarrier);
                     return;
+                }
+                else if (todo == CarrierTodo.Hide)
+                {
+                    elementCarrier.enabled = false;
+                }
+                else if (todo == CarrierTodo.Reveal)
+                {
+                    elementCarrier.enabled = true;
                 }
             }
         }
@@ -178,7 +173,7 @@ public partial class ElementCarrier
 
 public partial class ElementCarrier
 {
-    public ElementCarrier(ElementType elementType, Vector2Int rc, Direction direction)
+    public ElementCarrier(ElementType elementType, Vector2 xy, Direction direction)
     {
         gameObject = new GameObject("ElementCarrier");
         component = gameObject.AddComponent<Component>();
@@ -195,7 +190,7 @@ public partial class ElementCarrier
         Utils.SetParent(elements[4].gameObject, gameObject);
         Utils.SetSpriteSortingOrder(elements[4].gameObject, 2);
 
-        xy = Map.RCtoXY(rc);
+        this.xy = xy;
     }
 
     public Element GetElement(int r, int c)

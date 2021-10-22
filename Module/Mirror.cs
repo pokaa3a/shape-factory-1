@@ -38,24 +38,44 @@ public partial class Mirror : Module
         Utils.SetSpriteSortingOrder(gameObject, 2);
     }
 
-    public override bool ElementHits(ElementCarrier elementCarrier)
+    public override CarrierTodo AcknowledgeModule(ElementCarrier elementCarrier)
     {
         if (pose == MirrorPose.TopLeftBotRight)
         {
             if (elementCarrier.direction == Direction.Up)
             {
+                // up -> left
+                elementCarrier.xy = new Vector2(
+                    this.xy.x + Map.tileWH.x / 2f - ElementRunner.Instance.pos,
+                    this.xy.y
+                );
                 elementCarrier.direction = Direction.Left;
             }
             else if (elementCarrier.direction == Direction.Down)
             {
+                // down -> right
+                elementCarrier.xy = new Vector2(
+                    this.xy.x - Map.tileWH.x / 2f + ElementRunner.Instance.pos,
+                    this.xy.y
+                );
                 elementCarrier.direction = Direction.Right;
             }
             else if (elementCarrier.direction == Direction.Left)
             {
+                // left -> up
+                elementCarrier.xy = new Vector2(
+                    this.xy.x,
+                    this.xy.y - Map.tileWH.y / 2f + ElementRunner.Instance.pos
+                );
                 elementCarrier.direction = Direction.Down;
             }
             else if (elementCarrier.direction == Direction.Right)
             {
+                // right -> down
+                elementCarrier.xy = new Vector2(
+                    this.xy.x,
+                    this.xy.y + Map.tileWH.y / 2f - ElementRunner.Instance.pos
+                );
                 elementCarrier.direction = Direction.Up;
             }
         }
@@ -63,22 +83,41 @@ public partial class Mirror : Module
         {
             if (elementCarrier.direction == Direction.Up)
             {
+                // up -> right
+                elementCarrier.xy = new Vector2(
+                    this.xy.x - Map.tileWH.x / 2f + ElementRunner.Instance.pos,
+                    this.xy.y
+                );
                 elementCarrier.direction = Direction.Right;
             }
             else if (elementCarrier.direction == Direction.Down)
             {
+                // down -> left
+                elementCarrier.xy = new Vector2(
+                    this.xy.x + Map.tileWH.x / 2f - ElementRunner.Instance.pos,
+                    this.xy.y
+                );
                 elementCarrier.direction = Direction.Left;
             }
             else if (elementCarrier.direction == Direction.Left)
             {
-                elementCarrier.direction = Direction.Down;
+                // left -> up
+                elementCarrier.xy = new Vector2(
+                    this.xy.x,
+                    this.xy.y - Map.tileWH.y / 2f + ElementRunner.Instance.pos
+                );
+                elementCarrier.direction = Direction.Up;
             }
             else if (elementCarrier.direction == Direction.Right)
             {
-                elementCarrier.direction = Direction.Up;
+                // right -> down
+                elementCarrier.xy = new Vector2(
+                    this.xy.x,
+                    this.xy.y + Map.tileWH.y / 2f - ElementRunner.Instance.pos
+                );
+                elementCarrier.direction = Direction.Down;
             }
         }
-        elementCarrier.xy = Map.RCtoXY(this.rc);
-        return true;
+        return CarrierTodo.Hide;
     }
 }

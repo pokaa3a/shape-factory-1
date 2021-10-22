@@ -5,6 +5,7 @@ using UnityEngine;
 public partial class Module
 {
     public Vector2Int rc;
+    public Vector2 xy { get => Map.RCtoXY(this.rc); }
     public GameObject gameObject;
 }
 
@@ -17,10 +18,8 @@ public partial class Module
         Map.Instance.GetTile(rc).AddModuleToTile(this);
     }
 
-    // return true: keep element carrier alive
-    // return false: destroy element carrier
-    public virtual bool ElementHits(ElementCarrier elementCarrier)
+    public virtual CarrierTodo AcknowledgeModule(ElementCarrier carrier)
     {
-        return false;
+        return CarrierTodo.Destroy;
     }
 }
