@@ -92,6 +92,9 @@ public partial class Map
                 case MirrorInfo mirrorInfo:
                     Mirror mirror = new Mirror(mirrorInfo);
                     break;
+                case MergeInfo mergeInfo:
+                    Merge merge = new Merge(mergeInfo);
+                    break;
                 default: break;
             }
         }
@@ -141,8 +144,8 @@ public partial class Map
         else if (toward == Direction.Down)
             return new Vector2(xy.x, xy.y + tileWH.y / 2f - ElementRunner.Instance.pos);
         else if (toward == Direction.Left)
-            return new Vector2(xy.x - tileWH.x / 2f + ElementRunner.Instance.pos, xy.y);
-        else // toward == Direction.Right
             return new Vector2(xy.x + tileWH.x / 2f - ElementRunner.Instance.pos, xy.y);
+        else // toward == Direction.Right
+            return new Vector2(xy.x - tileWH.x / 2f + ElementRunner.Instance.pos, xy.y);
     }
 }

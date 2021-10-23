@@ -6,10 +6,30 @@ using UnityEngine.Assertions;
 public partial class Merge : Module
 {
     public const string name = "Merge";
-    public Direction outputDirection;
 
     private ElementCarrier input1 = null;
     private ElementCarrier input2 = null;
+}
+
+public partial class Merge : Module
+{
+    private Direction _outputDirection;
+    public Direction outputDirection
+    {
+        get => _outputDirection;
+        set
+        {
+            _outputDirection = value;
+            if (_outputDirection == Direction.Up)
+                gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            else if (_outputDirection == Direction.Left)
+                gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);
+            else if (_outputDirection == Direction.Down)
+                gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
+            else if (_outputDirection == Direction.Right)
+                gameObject.transform.rotation = Quaternion.Euler(0, 0, 270);
+        }
+    }
 }
 
 public partial class Merge : Module
@@ -28,6 +48,8 @@ public partial class Merge : Module
         if (input1 == null && input2 == null)
         {
             input1 = new ElementCarrier(carrier);
+            input1.enabled = false;
+
         }
         else if (input1 != null && input2 == null)
         {
@@ -36,8 +58,11 @@ public partial class Merge : Module
 
             input2 = new ElementCarrier(carrier);
             ElementCarrier mergedCarrier = MergeCarriers(input1, input2);
-            mergedCarrier.xy = Map.FirstFrameXy(this.rc, this.outputDirection);
-            mergedCarrier.enabled = false;
+            if (mergedCarrier != null)
+            {
+                mergedCarrier.xy = Map.FirstFrameXy(this.rc, this.outputDirection);
+                mergedCarrier.enabled = false;
+            }
 
             input1.Destroy();
             input2.Destroy();
@@ -54,14 +79,19 @@ public partial class Merge : Module
         // Can only merge carriers with same number of elements
         if (here.numElements != there.numElements) return null;
 
+        if (here.direction == there.direction) return null;
+
         // Invalid if any carriers coming from the conflicting direction
         if (here.direction == GetOppositeDirection(this.outputDirection) ||
             there.direction == GetOppositeDirection(this.outputDirection))
             return null;
 
-        ElementCarrier merged = MergeCarriersFrom(
-            here, there, GetOppositeDirection(here.direction));
+        if (there.direction == this.outputDirection)
+            return MergeCarriers(there, here);
+
+        ElementCarrier merged = MergeCarriersFrom(here, there, here.direction);
         merged.direction = this.outputDirection;
+
         return merged;
     }
 
@@ -69,7 +99,7 @@ public partial class Merge : Module
         ElementCarrier here, ElementCarrier there, Direction from)
     {
         ElementCarrier merged = new ElementCarrier(here);
-        if (from == Direction.Down)
+        if (from == Direction.Up)
         {
             if (merged.numElements == 1)
             {
@@ -96,7 +126,7 @@ public partial class Merge : Module
                 merged.topRightE = new Element(there.rightE.type);
             }
         }
-        else if (from == Direction.Up)
+        else if (from == Direction.Down)
         {
             if (merged.numElements == 1)
             {
@@ -123,7 +153,7 @@ public partial class Merge : Module
                 merged.botRightE = new Element(there.rightE.type);
             }
         }
-        else if (from == Direction.Right)
+        else if (from == Direction.Left)
         {
             if (merged.numElements == 1)
             {
@@ -149,7 +179,7 @@ public partial class Merge : Module
                 merged.botLeftE = new Element(there.botE.type);
             }
         }
-        else if (from == Direction.Left)
+        else if (from == Direction.Right)
         {
             if (merged.numElements == 1)
             {
@@ -186,34 +216,4 @@ public partial class Merge : Module
         else if (input == Direction.Left) return Direction.Right;
         else return Direction.Left;
     }
-
-    // private Direction GetLocalDirection(Direction input)
-    // {
-    //     switch (this.direction)
-    //     {
-    //         case Direction.Up:
-    //             if (input == Direction.Left) return Direction.Left;
-    //             else if (input == Direction.Right) return Direction.Right;
-    //             else if (input == Direction.Up) return Direction.Down;
-    //             else return Direction.Up;
-    //         case Direction.Down:
-    //             if (input == Direction.Right) return Direction.Left;
-    //             else if (input == Direction.Left) return Direction.Right;
-    //             else if (input == Direction.Down) return Direction.Down;
-    //             else return Direction.Up;
-    //         case Direction.Left:
-    //             if (input == Direction.Up) return Direction.Left;
-    //             else if (input == Direction.Down) return Direction.Right;
-    //             else if (input == Direction.Left) return Direction.Down;
-    //             else return Direction.Up;
-    //         case Direction.Right:
-    //             if (input == Direction.Down) return Direction.Left;
-    //             else if (input == Direction.Up) return Direction.Right;
-    //             else if (input == Direction.Right) return Direction.Down;
-    //             else return Direction.Up;
-    //         default:
-    //             break;
-    //     }
-    //     return Direction.Up;
-    // }
 }

@@ -45,37 +45,25 @@ public partial class Mirror : Module
             if (elementCarrier.direction == Direction.Up)
             {
                 // up -> left
-                elementCarrier.xy = new Vector2(
-                    this.xy.x + Map.tileWH.x / 2f - ElementRunner.Instance.pos,
-                    this.xy.y
-                );
+                elementCarrier.xy = Map.FirstFrameXy(this.rc, Direction.Left);
                 elementCarrier.direction = Direction.Left;
             }
             else if (elementCarrier.direction == Direction.Down)
             {
                 // down -> right
-                elementCarrier.xy = new Vector2(
-                    this.xy.x - Map.tileWH.x / 2f + ElementRunner.Instance.pos,
-                    this.xy.y
-                );
+                elementCarrier.xy = Map.FirstFrameXy(this.rc, Direction.Right);
                 elementCarrier.direction = Direction.Right;
             }
             else if (elementCarrier.direction == Direction.Left)
             {
                 // left -> down
-                elementCarrier.xy = new Vector2(
-                    this.xy.x,
-                    this.xy.y - Map.tileWH.y / 2f + ElementRunner.Instance.pos
-                );
+                elementCarrier.xy = Map.FirstFrameXy(this.rc, Direction.Down);
                 elementCarrier.direction = Direction.Down;
             }
             else if (elementCarrier.direction == Direction.Right)
             {
                 // right -> up
-                elementCarrier.xy = new Vector2(
-                    this.xy.x,
-                    this.xy.y + Map.tileWH.y / 2f - ElementRunner.Instance.pos
-                );
+                elementCarrier.xy = Map.FirstFrameXy(this.rc, Direction.Up);
                 elementCarrier.direction = Direction.Up;
             }
         }
@@ -84,37 +72,25 @@ public partial class Mirror : Module
             if (elementCarrier.direction == Direction.Up)
             {
                 // up -> right
-                elementCarrier.xy = new Vector2(
-                    this.xy.x - Map.tileWH.x / 2f + ElementRunner.Instance.pos,
-                    this.xy.y
-                );
+                elementCarrier.xy = Map.FirstFrameXy(this.rc, Direction.Right);
                 elementCarrier.direction = Direction.Right;
             }
             else if (elementCarrier.direction == Direction.Down)
             {
                 // down -> left
-                elementCarrier.xy = new Vector2(
-                    this.xy.x + Map.tileWH.x / 2f - ElementRunner.Instance.pos,
-                    this.xy.y
-                );
+                elementCarrier.xy = Map.FirstFrameXy(this.rc, Direction.Left);
                 elementCarrier.direction = Direction.Left;
             }
             else if (elementCarrier.direction == Direction.Left)
             {
                 // left -> down
-                elementCarrier.xy = new Vector2(
-                    this.xy.x,
-                    this.xy.y - Map.tileWH.y / 2f + ElementRunner.Instance.pos
-                );
+                elementCarrier.xy = Map.FirstFrameXy(this.rc, Direction.Down);
                 elementCarrier.direction = Direction.Down;
             }
             else if (elementCarrier.direction == Direction.Right)
             {
                 // right -> up
-                elementCarrier.xy = new Vector2(
-                    this.xy.x,
-                    this.xy.y + Map.tileWH.y / 2f - ElementRunner.Instance.pos
-                );
+                elementCarrier.xy = Map.FirstFrameXy(this.rc, Direction.Up);
                 elementCarrier.direction = Direction.Up;
             }
         }

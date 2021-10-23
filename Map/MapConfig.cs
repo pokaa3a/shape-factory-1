@@ -23,10 +23,10 @@ public partial class MapConfig
         info0.elementType = ElementType.Circle;
         config.modules.Add((ModuleInfo)info0);
 
-        // (1, 1): Source, right, square
+        // (0, 1): Source, right, square
         SourceInfo info1 = new SourceInfo();
         info1.name = Source.name;
-        info1.rc = new Vector2Int(1, 1);
+        info1.rc = new Vector2Int(0, 1);
         info1.direction = Direction.Right;
         info1.elementType = ElementType.Square;
         config.modules.Add((ModuleInfo)info1);
@@ -41,7 +41,7 @@ public partial class MapConfig
         Target.ElementConfig ec2 = new Target.ElementConfig(Vector2.down, ElementType.Square);
         info2.elements.Add(ec2);
 
-        config.modules.Add((ModuleInfo)info2);
+        // config.modules.Add((ModuleInfo)info2);
 
         // (4, 0): Mirror
         MirrorInfo info3 = new MirrorInfo();
@@ -51,11 +51,15 @@ public partial class MapConfig
 
         // (0, 3): Mirror
         MirrorInfo info4 = new MirrorInfo();
-        info4.rc = new Vector2Int(1, 3);
+        info4.rc = new Vector2Int(0, 3);
         info4.pose = MirrorPose.TopRightBotLeft;
         config.modules.Add((ModuleInfo)info4);
 
-        // 
+        // (4, 3): Merge
+        MergeInfo info5 = new MergeInfo();
+        info5.rc = new Vector2Int(4, 3);
+        info5.direction = Direction.Up;
+        config.modules.Add((ModuleInfo)info5);
 
         return config;
     }
