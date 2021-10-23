@@ -101,7 +101,6 @@ public partial class Source : Module
             {
                 Vector2 pos = xy + new Vector2(0, Map.tileWH.y / 2f + Time.deltaTime * Map.tileWH.y);
                 ElementCarrier carrier = new ElementCarrier(elementType, pos, direction);
-                ElementRunner.Instance.AddCarrier(carrier);
             }
         }
         else if (direction == Direction.Down)
@@ -110,7 +109,6 @@ public partial class Source : Module
             {
                 Vector2 pos = xy - new Vector2(0, Map.tileWH.y / 2f + Time.deltaTime * Map.tileWH.y);
                 ElementCarrier carrier = new ElementCarrier(elementType, pos, direction);
-                ElementRunner.Instance.AddCarrier(carrier);
             }
         }
         else if (direction == Direction.Left)
@@ -119,7 +117,6 @@ public partial class Source : Module
             {
                 Vector2 pos = xy - new Vector2(Map.tileWH.x / 2f + Time.deltaTime * Map.tileWH.x, 0);
                 ElementCarrier carrier = new ElementCarrier(elementType, pos, direction);
-                ElementRunner.Instance.AddCarrier(carrier);
             }
         }
         else if (direction == Direction.Right)
@@ -128,7 +125,6 @@ public partial class Source : Module
             {
                 Vector2 pos = xy + new Vector2(Map.tileWH.x / 2f + Time.deltaTime * Map.tileWH.x, 0);
                 ElementCarrier carrier = new ElementCarrier(elementType, pos, direction);
-                ElementRunner.Instance.AddCarrier(carrier);
             }
         }
     }

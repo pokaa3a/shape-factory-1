@@ -132,4 +132,17 @@ public partial class Map
         int r = (int)((xy.y - bottomLeftTileXy.y + tileWH.y * 0.5f) / tileWH.y);
         return new Vector2Int(r, c);
     }
+
+    public static Vector2 FirstFrameXy(Vector2Int rc, Direction toward)
+    {
+        Vector2 xy = RCtoXY(rc);
+        if (toward == Direction.Up)
+            return new Vector2(xy.x, xy.y - tileWH.y / 2f + ElementRunner.Instance.pos);
+        else if (toward == Direction.Down)
+            return new Vector2(xy.x, xy.y + tileWH.y / 2f - ElementRunner.Instance.pos);
+        else if (toward == Direction.Left)
+            return new Vector2(xy.x - tileWH.x / 2f + ElementRunner.Instance.pos, xy.y);
+        else // toward == Direction.Right
+            return new Vector2(xy.x + tileWH.x / 2f - ElementRunner.Instance.pos, xy.y);
+    }
 }

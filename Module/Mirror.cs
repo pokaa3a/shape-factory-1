@@ -62,7 +62,7 @@ public partial class Mirror : Module
             }
             else if (elementCarrier.direction == Direction.Left)
             {
-                // left -> up
+                // left -> down
                 elementCarrier.xy = new Vector2(
                     this.xy.x,
                     this.xy.y - Map.tileWH.y / 2f + ElementRunner.Instance.pos
@@ -71,7 +71,7 @@ public partial class Mirror : Module
             }
             else if (elementCarrier.direction == Direction.Right)
             {
-                // right -> down
+                // right -> up
                 elementCarrier.xy = new Vector2(
                     this.xy.x,
                     this.xy.y + Map.tileWH.y / 2f - ElementRunner.Instance.pos
@@ -101,21 +101,21 @@ public partial class Mirror : Module
             }
             else if (elementCarrier.direction == Direction.Left)
             {
-                // left -> up
+                // left -> down
                 elementCarrier.xy = new Vector2(
                     this.xy.x,
                     this.xy.y - Map.tileWH.y / 2f + ElementRunner.Instance.pos
                 );
-                elementCarrier.direction = Direction.Up;
+                elementCarrier.direction = Direction.Down;
             }
             else if (elementCarrier.direction == Direction.Right)
             {
-                // right -> down
+                // right -> up
                 elementCarrier.xy = new Vector2(
                     this.xy.x,
                     this.xy.y + Map.tileWH.y / 2f - ElementRunner.Instance.pos
                 );
-                elementCarrier.direction = Direction.Down;
+                elementCarrier.direction = Direction.Up;
             }
         }
         return CarrierTodo.Hide;
