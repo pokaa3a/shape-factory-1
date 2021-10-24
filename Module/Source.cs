@@ -30,11 +30,6 @@ public partial class Source : Module
 
         void FixedUpdate()
         {
-            // if (Time.time >= nextSpawnTime)
-            // {
-            //     source.Spawn();
-            //     nextSpawnTime = Time.time + spawnPeriod;
-            // }
             if (ElementRunner.Instance.firstFrame)
             {
                 source.Spawn();
@@ -92,40 +87,8 @@ public partial class Source : Module
 
     public void Spawn()
     {
-        // ElementCarrier ec = new ElementCarrier(elementType, rc, direction);
-
-        Vector2 xy = Map.RCtoXY(rc);
-        if (direction == Direction.Up)
-        {
-            if (Map.InsideMap(this.rc + Vector2Int.up))
-            {
-                Vector2 pos = xy + new Vector2(0, Map.tileWH.y / 2f + Time.deltaTime * Map.tileWH.y);
-                ElementCarrier carrier = new ElementCarrier(elementType, pos, direction);
-            }
-        }
-        else if (direction == Direction.Down)
-        {
-            if (Map.InsideMap(this.rc + Vector2Int.down))
-            {
-                Vector2 pos = xy - new Vector2(0, Map.tileWH.y / 2f + Time.deltaTime * Map.tileWH.y);
-                ElementCarrier carrier = new ElementCarrier(elementType, pos, direction);
-            }
-        }
-        else if (direction == Direction.Left)
-        {
-            if (Map.InsideMap(this.rc + Vector2Int.left))
-            {
-                Vector2 pos = xy - new Vector2(Map.tileWH.x / 2f + Time.deltaTime * Map.tileWH.x, 0);
-                ElementCarrier carrier = new ElementCarrier(elementType, pos, direction);
-            }
-        }
-        else if (direction == Direction.Right)
-        {
-            if (Map.InsideMap(this.rc + Vector2Int.right))
-            {
-                Vector2 pos = xy + new Vector2(Map.tileWH.x / 2f + Time.deltaTime * Map.tileWH.x, 0);
-                ElementCarrier carrier = new ElementCarrier(elementType, pos, direction);
-            }
-        }
+        Vector2 xy = Map.FirstFrameXy(this.rc, this.direction);
+        ElementCarrier carrier = new ElementCarrier(elementType, xy, this.direction);
+        carrier.enabled = false;
     }
 }

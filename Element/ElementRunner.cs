@@ -70,9 +70,9 @@ public partial class ElementRunner
     {
         foreach (ElementCarrier carrier in carriers)
         {
-            Vector2 xyFloor = new Vector2(
-                Mathf.Floor(carrier.xy.x / Map.tileWH.x) * Map.tileWH.x,
-                Mathf.Floor(carrier.xy.y / Map.tileWH.y) * Map.tileWH.y);
+            Vector2Int rc = Map.XYtoRC(carrier.xy);
+            Vector2 xyFloor = Map.bottomLeftTileXy - Map.tileWH / 2f +
+                new Vector2(rc.y * Map.tileWH.x, rc.x * Map.tileWH.y);
 
             if (carrier.direction == Direction.Up)
             {
