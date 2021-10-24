@@ -95,6 +95,9 @@ public partial class Map
                 case MergeInfo mergeInfo:
                     Merge merge = new Merge(mergeInfo);
                     break;
+                case TurnInfo turnInfo:
+                    Turn turn = new Turn(turnInfo);
+                    break;
                 default: break;
             }
         }

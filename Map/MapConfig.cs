@@ -43,16 +43,18 @@ public partial class MapConfig
 
         // config.modules.Add((ModuleInfo)info2);
 
-        // (4, 0): Mirror
-        MirrorInfo info3 = new MirrorInfo();
+        // (4, 0): Turn
+        TurnInfo info3 = new TurnInfo();
         info3.rc = new Vector2Int(4, 0);
-        info3.pose = MirrorPose.TopRightBotLeft;
+        info3.pose = TurnPose.TurnRight;
+        info3.direction = Direction.Right;
         config.modules.Add((ModuleInfo)info3);
 
-        // (0, 3): Mirror
-        MirrorInfo info4 = new MirrorInfo();
+        // (0, 3): Turn
+        TurnInfo info4 = new TurnInfo();
         info4.rc = new Vector2Int(0, 3);
-        info4.pose = MirrorPose.TopRightBotLeft;
+        info4.pose = TurnPose.TurnLeft;
+        info4.direction = Direction.Up;
         config.modules.Add((ModuleInfo)info4);
 
         // (4, 3): Merge

@@ -29,6 +29,10 @@ public class SpritePath
         // Mirror
         public const string mirror = "Sprites/Module/Mirror";
 
+        // Turn
+        public const string turnLeft = "Sprites/Module/turn_left";
+        public const string turnRight = "Sprites/Module/turn_right";
+
         // Merge
         public const string merge = "Sprites/Module/Merge";
 

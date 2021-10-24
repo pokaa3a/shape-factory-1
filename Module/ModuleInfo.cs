@@ -24,6 +24,12 @@ public class MirrorInfo : ModuleInfo
     public MirrorPose pose;
 }
 
+public class TurnInfo : ModuleInfo
+{
+    public TurnPose pose;
+    public Direction direction;
+}
+
 public class MergeInfo : ModuleInfo
 {
     public Direction direction;
