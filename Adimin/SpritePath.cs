@@ -38,6 +38,10 @@ public class SpritePath
 
         // Split
         public const string split = "Sprites/Module/Split";
+
+        // Rotate
+        public const string rotateClockwise = "Sprites/Module/rotate_clockwise";
+        public const string rotateCounterClockwise = "Sprites/Module/rotate_counterclockwise";
     }
 
     public class Element

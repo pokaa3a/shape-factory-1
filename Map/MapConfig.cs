@@ -63,6 +63,12 @@ public partial class MapConfig
         info5.direction = Direction.Up;
         config.modules.Add((ModuleInfo)info5);
 
+        // (6, 3): Rotate
+        RotateInfo info6 = new RotateInfo();
+        info6.rc = new Vector2Int(6, 3);
+        info6.pose = RotatePose.ClockWise;
+        config.modules.Add((ModuleInfo)info6);
+
         return config;
     }
 }

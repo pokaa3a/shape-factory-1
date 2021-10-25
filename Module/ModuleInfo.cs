@@ -39,3 +39,8 @@ public class SplitInfo : ModuleInfo
 {
     public Direction direction;
 }
+
+public class RotateInfo : ModuleInfo
+{
+    public RotatePose pose;
+}

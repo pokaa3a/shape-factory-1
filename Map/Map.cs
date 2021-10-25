@@ -98,6 +98,9 @@ public partial class Map
                 case TurnInfo turnInfo:
                     Turn turn = new Turn(turnInfo);
                     break;
+                case RotateInfo rotateInfo:
+                    Rotate rotate = new Rotate(rotateInfo);
+                    break;
                 default: break;
             }
         }
