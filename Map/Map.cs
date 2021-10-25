@@ -101,6 +101,9 @@ public partial class Map
                 case RotateInfo rotateInfo:
                     Rotate rotate = new Rotate(rotateInfo);
                     break;
+                case SplitInfo splitInfo:
+                    Split split = new Split(splitInfo);
+                    break;
                 default: break;
             }
         }

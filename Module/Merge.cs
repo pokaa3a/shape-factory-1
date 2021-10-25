@@ -157,7 +157,7 @@ public partial class Merge : Module
         {
             if (merged.numElements == 1)
             {
-                // → xo
+                // → x o
                 Assert.IsNotNull(merged.midE);
                 (merged.rightE, merged.midE) = (merged.midE, merged.rightE);
 
@@ -166,8 +166,8 @@ public partial class Merge : Module
             }
             else if (merged.numElements == 2)
             {
-                // → xo
-                //   xo
+                // → x o
+                //   x o
                 Assert.IsNotNull(merged.topE);
                 Assert.IsNotNull(merged.botE);
                 (merged.topRightE, merged.topE) = (merged.topE, merged.topRightE);
@@ -183,7 +183,7 @@ public partial class Merge : Module
         {
             if (merged.numElements == 1)
             {
-                // ox ←
+                // o x ←
                 Assert.IsNotNull(merged.midE);
                 (merged.leftE, merged.midE) = (merged.midE, merged.leftE);
 
@@ -192,8 +192,8 @@ public partial class Merge : Module
             }
             else if (merged.numElements == 2)
             {
-                // ox ←
-                // ox
+                // o x ←
+                // o x
                 Assert.IsNotNull(merged.topE);
                 Assert.IsNotNull(merged.botE);
                 (merged.topLeftE, merged.topE) = (merged.topE, merged.topLeftE);

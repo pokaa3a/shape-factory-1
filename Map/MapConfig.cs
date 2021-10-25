@@ -43,9 +43,9 @@ public partial class MapConfig
 
         // config.modules.Add((ModuleInfo)info2);
 
-        // (4, 0): Turn
+        // (2, 0): Turn
         TurnInfo info3 = new TurnInfo();
-        info3.rc = new Vector2Int(4, 0);
+        info3.rc = new Vector2Int(2, 0);
         info3.pose = TurnPose.TurnRight;
         info3.direction = Direction.Right;
         config.modules.Add((ModuleInfo)info3);
@@ -57,17 +57,23 @@ public partial class MapConfig
         info4.direction = Direction.Up;
         config.modules.Add((ModuleInfo)info4);
 
-        // (4, 3): Merge
+        // (2, 3): Merge
         MergeInfo info5 = new MergeInfo();
-        info5.rc = new Vector2Int(4, 3);
+        info5.rc = new Vector2Int(2, 3);
         info5.direction = Direction.Up;
         config.modules.Add((ModuleInfo)info5);
 
-        // (6, 3): Rotate
+        // (4, 3): Rotate
         RotateInfo info6 = new RotateInfo();
-        info6.rc = new Vector2Int(6, 3);
+        info6.rc = new Vector2Int(4, 3);
         info6.pose = RotatePose.ClockWise;
         config.modules.Add((ModuleInfo)info6);
+
+        // (6, 3): Split
+        SplitInfo info7 = new SplitInfo();
+        info7.rc = new Vector2Int(6, 3);
+        info7.direction = Direction.Up;
+        config.modules.Add((ModuleInfo)info7);
 
         return config;
     }
