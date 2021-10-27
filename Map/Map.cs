@@ -17,7 +17,7 @@ public enum Direction
 
 public partial class Map
 {
-    public const int rows = 8;
+    public const int rows = 9;
     public const int cols = 7;
     public static Vector2 screenWH { get; private set; }
     public static Vector2 tileWH { get; private set; }
@@ -89,9 +89,6 @@ public partial class Map
                 case TargetInfo targetInfo:
                     Target target = new Target(targetInfo);
                     break;
-                case MirrorInfo mirrorInfo:
-                    Mirror mirror = new Mirror(mirrorInfo);
-                    break;
                 case MergeInfo mergeInfo:
                     Merge merge = new Merge(mergeInfo);
                     break;
@@ -103,6 +100,9 @@ public partial class Map
                     break;
                 case SplitInfo splitInfo:
                     Split split = new Split(splitInfo);
+                    break;
+                case PaintInfo paintInfo:
+                    Paint paint = new Paint(paintInfo);
                     break;
                 default: break;
             }

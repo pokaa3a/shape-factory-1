@@ -73,13 +73,13 @@ public partial class Source : Module
         switch (info.elementType)
         {
             case ElementType.Circle:
-                Utils.SetSprite(elementObject, SpritePath.Element.circle); break;
+                Utils.SetSprite(elementObject, SpritePath.Element.Circle.white); break;
             case ElementType.Cross:
-                Utils.SetSprite(elementObject, SpritePath.Element.cross); break;
+                Utils.SetSprite(elementObject, SpritePath.Element.Cross.white); break;
             case ElementType.Square:
-                Utils.SetSprite(elementObject, SpritePath.Element.square); break;
+                Utils.SetSprite(elementObject, SpritePath.Element.Square.white); break;
             case ElementType.Triangle:
-                Utils.SetSprite(elementObject, SpritePath.Element.triangle); break;
+                Utils.SetSprite(elementObject, SpritePath.Element.Triangle.white); break;
             default: break;
         }
         Utils.SetSpriteSortingOrder(elementObject, 4);
@@ -88,7 +88,7 @@ public partial class Source : Module
     public void Spawn()
     {
         Vector2 xy = Map.FirstFrameXy(this.rc, this.direction);
-        ElementCarrier carrier = new ElementCarrier(elementType, xy, this.direction);
+        ElementCarrier carrier = new ElementCarrier(elementType, PaintColor.White, xy, this.direction);
         carrier.enabled = false;
     }
 }

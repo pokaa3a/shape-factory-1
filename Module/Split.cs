@@ -65,30 +65,30 @@ public partial class Split : Module
                 // x , o
                 //   ↑
                 //   xo
-                left.midE = new Element(carrier.leftE.type);
-                right.midE = new Element(carrier.rightE.type);
+                left.midE = new Element(carrier.leftE);
+                right.midE = new Element(carrier.rightE);
             }
             else if (carrier.direction == Direction.Down)
             {
                 //   xo
                 //   ↓
                 // x , o
-                left.midE = new Element(carrier.rightE.type);
-                right.midE = new Element(carrier.leftE.type);
+                left.midE = new Element(carrier.rightE);
+                right.midE = new Element(carrier.leftE);
             }
             else if (carrier.direction == Direction.Left)
             {
                 // o, ← o
                 // x    x
-                left.midE = new Element(carrier.botE.type);
-                right.midE = new Element(carrier.topE.type);
+                left.midE = new Element(carrier.botE);
+                right.midE = new Element(carrier.topE);
             }
             else if (carrier.direction == Direction.Right)
             {
                 // o → o,
                 // x   x
-                left.midE = new Element(carrier.topE.type);
-                right.midE = new Element(carrier.botE.type);
+                left.midE = new Element(carrier.topE);
+                right.midE = new Element(carrier.botE);
             }
         }
         else if (carrier.numElements == 4)
@@ -100,10 +100,10 @@ public partial class Split : Module
                 //   ↑
                 //   xo
                 //   xo
-                left.topE = new Element(carrier.topLeftE.type);
-                left.botE = new Element(carrier.botLeftE.type);
-                right.topE = new Element(carrier.topRightE.type);
-                right.botE = new Element(carrier.botRightE.type);
+                left.topE = new Element(carrier.topLeftE);
+                left.botE = new Element(carrier.botLeftE);
+                right.topE = new Element(carrier.topRightE);
+                right.botE = new Element(carrier.botRightE);
             }
             else if (carrier.direction == Direction.Down)
             {
@@ -112,28 +112,28 @@ public partial class Split : Module
                 //   ↓
                 // x , o
                 // x   o
-                left.topE = new Element(carrier.topRightE.type);
-                left.botE = new Element(carrier.botRightE.type);
-                right.topE = new Element(carrier.topLeftE.type);
-                right.botE = new Element(carrier.botLeftE.type);
+                left.topE = new Element(carrier.topRightE);
+                left.botE = new Element(carrier.botRightE);
+                right.topE = new Element(carrier.topLeftE);
+                right.botE = new Element(carrier.botLeftE);
             }
             else if (carrier.direction == Direction.Left)
             {
                 // xo, ← xo 
                 // xo    xo
-                left.leftE = new Element(carrier.botLeftE.type);
-                left.rightE = new Element(carrier.botRightE.type);
-                right.leftE = new Element(carrier.topLeftE.type);
-                right.rightE = new Element(carrier.topRightE.type);
+                left.leftE = new Element(carrier.botLeftE);
+                left.rightE = new Element(carrier.botRightE);
+                right.leftE = new Element(carrier.topLeftE);
+                right.rightE = new Element(carrier.topRightE);
             }
             else if (carrier.direction == Direction.Right)
             {
                 // xo → xo,
                 // xo   xo
-                left.leftE = new Element(carrier.topLeftE.type);
-                left.rightE = new Element(carrier.topRightE.type);
-                right.leftE = new Element(carrier.botLeftE.type);
-                right.rightE = new Element(carrier.botRightE.type);
+                left.leftE = new Element(carrier.topLeftE);
+                left.rightE = new Element(carrier.topRightE);
+                right.leftE = new Element(carrier.botLeftE);
+                right.rightE = new Element(carrier.botRightE);
             }
         }
         left.direction = GetSplitLeftDirection(carrier.direction);

@@ -45,13 +45,13 @@ public partial class Target : Module
             switch (config.type)
             {
                 case ElementType.Circle:
-                    Utils.SetSprite(obj, SpritePath.Element.circle); break;
+                    Utils.SetSprite(obj, SpritePath.Element.Circle.white); break;
                 case ElementType.Cross:
-                    Utils.SetSprite(obj, SpritePath.Element.cross); break;
+                    Utils.SetSprite(obj, SpritePath.Element.Cross.white); break;
                 case ElementType.Square:
-                    Utils.SetSprite(obj, SpritePath.Element.square); break;
+                    Utils.SetSprite(obj, SpritePath.Element.Square.white); break;
                 case ElementType.Triangle:
-                    Utils.SetSprite(obj, SpritePath.Element.triangle); break;
+                    Utils.SetSprite(obj, SpritePath.Element.Triangle.white); break;
                 default: break;
             }
             Utils.SetParent(obj, this.gameObject);

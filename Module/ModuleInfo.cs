@@ -19,11 +19,6 @@ public class TargetInfo : ModuleInfo
     public List<Target.ElementConfig> elements = new List<Target.ElementConfig>();
 }
 
-public class MirrorInfo : ModuleInfo
-{
-    public MirrorPose pose;
-}
-
 public class TurnInfo : ModuleInfo
 {
     public TurnPose pose;
@@ -43,4 +38,9 @@ public class SplitInfo : ModuleInfo
 public class RotateInfo : ModuleInfo
 {
     public RotatePose pose;
+}
+
+public class PaintInfo : ModuleInfo
+{
+    public PaintColor color;
 }

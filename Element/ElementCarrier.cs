@@ -216,7 +216,8 @@ public partial class ElementCarrier
 
 public partial class ElementCarrier
 {
-    public ElementCarrier(ElementType elementType, Vector2 xy, Direction direction)
+    public ElementCarrier(
+        ElementType elementType, PaintColor color, Vector2 xy, Direction direction)
     {
         gameObject = new GameObject("ElementCarrier");
         component = gameObject.AddComponent<Component>();
@@ -229,7 +230,7 @@ public partial class ElementCarrier
         }
 
         // ElementCarrier always carries at least one element
-        midE = new Element(elementType);
+        midE = new Element(elementType, color);
 
         this.xy = xy;
         ElementRunner.Instance.AddCarrier(this);
@@ -255,7 +256,7 @@ public partial class ElementCarrier
                 Element e = other.GetElement(r, c);
                 if (e != null)
                 {
-                    Element newElement = new Element(e.type);
+                    Element newElement = new Element(e);
                     elements[(r + 1) * 3 + (c + 1)] = newElement;
                     Utils.SetParent(newElement.gameObject, gameObject);
                     Utils.SetSpriteSortingOrder(newElement.gameObject, 2);
@@ -282,36 +283,36 @@ public partial class ElementCarrier
         ElementRunner.Instance.AddCarrier(this);
     }
 
-    public ElementCarrier(
-        Vector2Int rc, Direction direction,
-        List<ElementType> elementTypes, List<Vector2Int> poses)
-    {
-        gameObject = new GameObject("ElementCarrier");
-        component = gameObject.AddComponent<Component>();
-        component.elementCarrier = this;
-        this.direction = direction;
+    // public ElementCarrier(
+    //     Vector2Int rc, Direction direction,
+    //     List<ElementType> elementTypes, List<Vector2Int> poses)
+    // {
+    //     gameObject = new GameObject("ElementCarrier");
+    //     component = gameObject.AddComponent<Component>();
+    //     component.elementCarrier = this;
+    //     this.direction = direction;
 
-        for (int i = 0; i < 9; ++i)
-        {
-            elements.Add(null);
-        }
+    //     for (int i = 0; i < 9; ++i)
+    //     {
+    //         elements.Add(null);
+    //     }
 
-        Assert.IsTrue(elementTypes.Count == poses.Count);
-        for (int i = 0; i < elementTypes.Count; ++i)
-        {
-            int r = poses[i].x;
-            int c = poses[i].y;
-            Element newElement = new Element(elementTypes[i]);
-            elements[(r + 1) * 3 + (c + 1)] = newElement;
+    //     Assert.IsTrue(elementTypes.Count == poses.Count);
+    //     for (int i = 0; i < elementTypes.Count; ++i)
+    //     {
+    //         int r = poses[i].x;
+    //         int c = poses[i].y;
+    //         Element newElement = new Element(elementTypes[i]);
+    //         elements[(r + 1) * 3 + (c + 1)] = newElement;
 
-            Utils.SetParent(newElement.gameObject, gameObject);
-            Utils.SetSpriteSortingOrder(newElement.gameObject, 2);
+    //         Utils.SetParent(newElement.gameObject, gameObject);
+    //         Utils.SetSpriteSortingOrder(newElement.gameObject, 2);
 
-            newElement.xy = new Vector2(c, r) * patternStep;
-        }
-        this.xy = Map.RCtoXY(rc);
-        ElementRunner.Instance.AddCarrier(this);
-    }
+    //         newElement.xy = new Vector2(c, r) * patternStep;
+    //     }
+    //     this.xy = Map.RCtoXY(rc);
+    //     ElementRunner.Instance.AddCarrier(this);
+    // }
 
     public Element GetElement(int r, int c)
     {

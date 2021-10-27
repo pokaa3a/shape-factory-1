@@ -12,7 +12,6 @@ public enum ElementType
 
 public partial class Element
 {
-    public ElementType type;
     public GameObject gameObject;
 }
 
@@ -40,37 +39,136 @@ public partial class Element
             if (sprRender != null) sprRender.enabled = _enabled;
         }
     }
+
+    private ElementType _type;
+    public ElementType type
+    {
+        get => _type;
+        set
+        {
+            _type = value;
+            SetElementSprite(_type, this.color);
+        }
+    }
+
+    private PaintColor _color;
+    public PaintColor color
+    {
+        get => _color;
+        set
+        {
+            _color = value;
+            SetElementSprite(this.type, _color);
+        }
+    }
 }
 
 public partial class Element
 {
-    public Element(ElementType type)
+    public Element(ElementType type, PaintColor color = PaintColor.White)
     {
-        this.type = type;
         gameObject = new GameObject();
-        // component = gameObject.AddComponent<Component>();
-        // component.Initialize(this, direction, Element.movingSpeed);
+        this.type = type;
+        this.color = color;
+
+        Utils.SetSpriteSortingOrder(gameObject, 2);
+    }
+
+    public Element(Element other)
+    {
+        gameObject = new GameObject();
+        this.type = other.type;
+        this.color = other.color;
+
+        Utils.SetSpriteSortingOrder(gameObject, 2);
+    }
+
+    private void SetElementSprite(ElementType type, PaintColor color)
+    {
         switch (type)
         {
             case ElementType.Circle:
-                Utils.SetSprite(gameObject, SpritePath.Element.circle);
+                switch (color)
+                {
+                    case PaintColor.White:
+                        Utils.SetSprite(gameObject, SpritePath.Element.Circle.white);
+                        break;
+                    case PaintColor.Blue:
+                        Utils.SetSprite(gameObject, SpritePath.Element.Circle.blue);
+                        break;
+                    case PaintColor.Yellow:
+                        Utils.SetSprite(gameObject, SpritePath.Element.Circle.yellow);
+                        break;
+                    case PaintColor.Red:
+                        Utils.SetSprite(gameObject, SpritePath.Element.Circle.red);
+                        break;
+                    default:
+                        break;
+                }
                 gameObject.name = "Element-circle";
                 break;
             case ElementType.Cross:
-                Utils.SetSprite(gameObject, SpritePath.Element.cross);
+                switch (color)
+                {
+                    case PaintColor.White:
+                        Utils.SetSprite(gameObject, SpritePath.Element.Cross.white);
+                        break;
+                    case PaintColor.Blue:
+                        Utils.SetSprite(gameObject, SpritePath.Element.Cross.blue);
+                        break;
+                    case PaintColor.Yellow:
+                        Utils.SetSprite(gameObject, SpritePath.Element.Cross.yellow);
+                        break;
+                    case PaintColor.Red:
+                        Utils.SetSprite(gameObject, SpritePath.Element.Cross.red);
+                        break;
+                    default:
+                        break;
+                }
                 gameObject.name = "Element-cross";
                 break;
             case ElementType.Square:
-                Utils.SetSprite(gameObject, SpritePath.Element.square);
+                switch (color)
+                {
+                    case PaintColor.White:
+                        Utils.SetSprite(gameObject, SpritePath.Element.Square.white);
+                        break;
+                    case PaintColor.Blue:
+                        Utils.SetSprite(gameObject, SpritePath.Element.Square.blue);
+                        break;
+                    case PaintColor.Yellow:
+                        Utils.SetSprite(gameObject, SpritePath.Element.Square.yellow);
+                        break;
+                    case PaintColor.Red:
+                        Utils.SetSprite(gameObject, SpritePath.Element.Square.red);
+                        break;
+                    default:
+                        break;
+                }
                 gameObject.name = "Element-square";
                 break;
             case ElementType.Triangle:
-                Utils.SetSprite(gameObject, SpritePath.Element.triangle);
+                switch (color)
+                {
+                    case PaintColor.White:
+                        Utils.SetSprite(gameObject, SpritePath.Element.Triangle.white);
+                        break;
+                    case PaintColor.Blue:
+                        Utils.SetSprite(gameObject, SpritePath.Element.Triangle.blue);
+                        break;
+                    case PaintColor.Yellow:
+                        Utils.SetSprite(gameObject, SpritePath.Element.Triangle.yellow);
+                        break;
+                    case PaintColor.Red:
+                        Utils.SetSprite(gameObject, SpritePath.Element.Triangle.red);
+                        break;
+                    default:
+                        break;
+                }
                 gameObject.name = "Element-triangle";
                 break;
             default:
                 break;
         }
-        Utils.SetSpriteSortingOrder(gameObject, 2);
     }
 }

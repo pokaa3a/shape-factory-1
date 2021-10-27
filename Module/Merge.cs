@@ -109,7 +109,7 @@ public partial class Merge : Module
                 (merged.botE, merged.midE) = (merged.midE, merged.botE);
 
                 Assert.IsNotNull(there.midE);
-                merged.topE = new Element(there.midE.type);
+                merged.topE = new Element(there.midE);
             }
             else if (merged.numElements == 2)
             {
@@ -122,8 +122,8 @@ public partial class Merge : Module
 
                 Assert.IsNotNull(there.leftE);
                 Assert.IsNotNull(there.rightE);
-                merged.topLeftE = new Element(there.leftE.type);
-                merged.topRightE = new Element(there.rightE.type);
+                merged.topLeftE = new Element(there.leftE);
+                merged.topRightE = new Element(there.rightE);
             }
         }
         else if (from == Direction.Down)
@@ -136,7 +136,7 @@ public partial class Merge : Module
                 (merged.topE, merged.midE) = (merged.midE, merged.topE);
 
                 Assert.IsNotNull(there.midE);
-                merged.botE = new Element(there.midE.type);
+                merged.botE = new Element(there.midE);
             }
             else if (merged.numElements == 2)
             {
@@ -149,8 +149,8 @@ public partial class Merge : Module
 
                 Assert.IsNotNull(there.leftE);
                 Assert.IsNotNull(there.rightE);
-                merged.botLeftE = new Element(there.leftE.type);
-                merged.botRightE = new Element(there.rightE.type);
+                merged.botLeftE = new Element(there.leftE);
+                merged.botRightE = new Element(there.rightE);
             }
         }
         else if (from == Direction.Left)
@@ -162,7 +162,7 @@ public partial class Merge : Module
                 (merged.rightE, merged.midE) = (merged.midE, merged.rightE);
 
                 Assert.IsNotNull(there.midE);
-                merged.leftE = new Element(there.midE.type);
+                merged.leftE = new Element(there.midE);
             }
             else if (merged.numElements == 2)
             {
@@ -175,8 +175,8 @@ public partial class Merge : Module
 
                 Assert.IsNotNull(there.topE);
                 Assert.IsNotNull(there.botE);
-                merged.topLeftE = new Element(there.topE.type);
-                merged.botLeftE = new Element(there.botE.type);
+                merged.topLeftE = new Element(there.topE);
+                merged.botLeftE = new Element(there.botE);
             }
         }
         else if (from == Direction.Right)
@@ -188,7 +188,7 @@ public partial class Merge : Module
                 (merged.leftE, merged.midE) = (merged.midE, merged.leftE);
 
                 Assert.IsNotNull(there.midE);
-                merged.rightE = new Element(there.midE.type);
+                merged.rightE = new Element(there.midE);
             }
             else if (merged.numElements == 2)
             {
@@ -201,8 +201,8 @@ public partial class Merge : Module
 
                 Assert.IsNotNull(there.topE);
                 Assert.IsNotNull(there.botE);
-                merged.topRightE = new Element(there.topE.type);
-                merged.botRightE = new Element(there.botE.type);
+                merged.topRightE = new Element(there.topE);
+                merged.botRightE = new Element(there.botE);
             }
         }
         return merged;

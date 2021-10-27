@@ -75,6 +75,24 @@ public partial class MapConfig
         info7.direction = Direction.Up;
         config.modules.Add((ModuleInfo)info7);
 
+        // (6, 1): Paint
+        PaintInfo info8 = new PaintInfo();
+        info8.rc = new Vector2Int(6, 1);
+        info8.color = PaintColor.Yellow;
+        config.modules.Add((ModuleInfo)info8);
+
+        // (6, 5): Paint
+        PaintInfo info9 = new PaintInfo();
+        info9.rc = new Vector2Int(6, 5);
+        info9.color = PaintColor.Blue;
+        config.modules.Add((ModuleInfo)info9);
+
+        // (5, 3): Paint
+        PaintInfo info10 = new PaintInfo();
+        info10.rc = new Vector2Int(5, 3);
+        info10.color = PaintColor.Red;
+        config.modules.Add((ModuleInfo)info10);
+
         return config;
     }
 }
