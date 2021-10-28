@@ -44,3 +44,8 @@ public class PaintInfo : ModuleInfo
 {
     public PaintColor color;
 }
+
+public class GrowInfo : ModuleInfo
+{
+    public Direction direction;
+}

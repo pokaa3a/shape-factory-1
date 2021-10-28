@@ -75,16 +75,23 @@ public partial class MapConfig
         info7.direction = Direction.Up;
         config.modules.Add((ModuleInfo)info7);
 
-        // (6, 1): Paint
+        // (6, 2): Paint
         PaintInfo info8 = new PaintInfo();
-        info8.rc = new Vector2Int(6, 1);
+        info8.rc = new Vector2Int(6, 2);
         info8.color = PaintColor.Yellow;
         config.modules.Add((ModuleInfo)info8);
 
-        // (6, 5): Paint
-        PaintInfo info9 = new PaintInfo();
+        // (6, 1): Grow
+        GrowInfo info13 = new GrowInfo();
+        info13.rc = new Vector2Int(6, 1);
+        info13.direction = Direction.Left;
+        config.modules.Add((ModuleInfo)info13);
+
+        // (6, 5): Turn
+        TurnInfo info9 = new TurnInfo();
         info9.rc = new Vector2Int(6, 5);
-        info9.color = PaintColor.Blue;
+        info9.pose = TurnPose.TurnRight;
+        info9.direction = Direction.Down;
         config.modules.Add((ModuleInfo)info9);
 
         // (5, 3): Paint
@@ -92,6 +99,18 @@ public partial class MapConfig
         info10.rc = new Vector2Int(5, 3);
         info10.color = PaintColor.Red;
         config.modules.Add((ModuleInfo)info10);
+
+        // (2, 5): Grow
+        GrowInfo info11 = new GrowInfo();
+        info11.rc = new Vector2Int(2, 5);
+        info11.direction = Direction.Down;
+        config.modules.Add((ModuleInfo)info11);
+
+        // (4, 5): Paint
+        PaintInfo info12 = new PaintInfo();
+        info12.rc = new Vector2Int(4, 5);
+        info12.color = PaintColor.Blue;
+        config.modules.Add((ModuleInfo)info12);
 
         return config;
     }

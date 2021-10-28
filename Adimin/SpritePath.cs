@@ -46,6 +46,8 @@ public class SpritePath
         public const string paintBlue = "Sprites/Module/paint/paint_blue";
         public const string paintRed = "Sprites/Module/paint/paint_red";
 
+        // Grow
+        public const string grow = "Sprites/Module/grow/grow";
     }
 
     public class Element

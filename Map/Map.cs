@@ -104,6 +104,9 @@ public partial class Map
                 case PaintInfo paintInfo:
                     Paint paint = new Paint(paintInfo);
                     break;
+                case GrowInfo growInfo:
+                    Grow grow = new Grow(growInfo);
+                    break;
                 default: break;
             }
         }
