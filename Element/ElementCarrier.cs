@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+public enum CarrierTodo
+{
+    Reveal,
+    Hide,
+    Destroy
+}
+
 public partial class ElementCarrier
 {
     public const float patternStep = 0.08f;
+    public const float timePerTile = 1.1f;
     public Direction direction;
     public GameObject gameObject;
     public List<Element> elements = new List<Element>();
+    public bool moveable = true;
     private Component component;
 }
 
@@ -186,16 +195,31 @@ public partial class ElementCarrier
 
         void FixedUpdate()
         {
+            if (!elementCarrier.moveable) return;
+
+            Vector2Int prevRc = Map.XYtoRC(elementCarrier.xy);
+
+            // Update carrier's position
+            float movement = Time.deltaTime * Map.tileWH.y / timePerTile;
+            if (elementCarrier.direction == Direction.Up)
+                elementCarrier.xy += Vector2.up * movement;
+            else if (elementCarrier.direction == Direction.Down)
+                elementCarrier.xy += Vector2.down * movement;
+            else if (elementCarrier.direction == Direction.Left)
+                elementCarrier.xy += Vector2.left * movement;
+            else if (elementCarrier.direction == Direction.Right)
+                elementCarrier.xy += Vector2.right * movement;
+
             if (!Map.InsideMap(elementCarrier.xy))
             {
                 elementCarrier.Destroy();
                 return;
             }
 
-            if (ElementRunner.Instance.firstFrame)
+            Vector2Int cntRc = Map.XYtoRC(elementCarrier.xy);
+            if (prevRc != cntRc) // step into a new tile
             {
-                Vector2Int rc = Map.XYtoRC(elementCarrier.xy);
-                CarrierTodo todo = Map.Instance.GetTile(rc).AcknowledgeTile(elementCarrier);
+                CarrierTodo todo = Map.Instance.GetTile(cntRc).AcknowledgeTile(elementCarrier);
                 if (todo == CarrierTodo.Destroy)
                 {
                     elementCarrier.Destroy();
@@ -233,7 +257,7 @@ public partial class ElementCarrier
         midE = new Element(elementType, color);
 
         this.xy = xy;
-        ElementRunner.Instance.AddCarrier(this);
+        // ElementRunner.Instance.AddCarrier(this);
     }
 
     // Copy constructor
@@ -265,7 +289,7 @@ public partial class ElementCarrier
             }
         }
         this.xy = other.xy;
-        ElementRunner.Instance.AddCarrier(this);
+        // ElementRunner.Instance.AddCarrier(this);
     }
 
     public ElementCarrier(Vector2Int rc, Direction direction)
@@ -280,39 +304,8 @@ public partial class ElementCarrier
             elements.Add(null);
         }
         this.xy = Map.RCtoXY(rc);
-        ElementRunner.Instance.AddCarrier(this);
+        // ElementRunner.Instance.AddCarrier(this);
     }
-
-    // public ElementCarrier(
-    //     Vector2Int rc, Direction direction,
-    //     List<ElementType> elementTypes, List<Vector2Int> poses)
-    // {
-    //     gameObject = new GameObject("ElementCarrier");
-    //     component = gameObject.AddComponent<Component>();
-    //     component.elementCarrier = this;
-    //     this.direction = direction;
-
-    //     for (int i = 0; i < 9; ++i)
-    //     {
-    //         elements.Add(null);
-    //     }
-
-    //     Assert.IsTrue(elementTypes.Count == poses.Count);
-    //     for (int i = 0; i < elementTypes.Count; ++i)
-    //     {
-    //         int r = poses[i].x;
-    //         int c = poses[i].y;
-    //         Element newElement = new Element(elementTypes[i]);
-    //         elements[(r + 1) * 3 + (c + 1)] = newElement;
-
-    //         Utils.SetParent(newElement.gameObject, gameObject);
-    //         Utils.SetSpriteSortingOrder(newElement.gameObject, 2);
-
-    //         newElement.xy = new Vector2(c, r) * patternStep;
-    //     }
-    //     this.xy = Map.RCtoXY(rc);
-    //     ElementRunner.Instance.AddCarrier(this);
-    // }
 
     public Element GetElement(int r, int c)
     {
@@ -324,6 +317,6 @@ public partial class ElementCarrier
     public void Destroy()
     {
         UnityEngine.Object.Destroy(gameObject);
-        ElementRunner.Instance.RemoveCarrier(this);
+        // ElementRunner.Instance.RemoveCarrier(this);
     }
 }

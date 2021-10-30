@@ -9,6 +9,7 @@ public partial class Merge : Module
 
     private ElementCarrier input1 = null;
     private ElementCarrier input2 = null;
+    private float input1Timestamp;
 }
 
 public partial class Merge : Module
@@ -45,11 +46,22 @@ public partial class Merge : Module
 
     public override CarrierTodo AcknowledgeModule(ElementCarrier carrier)
     {
+        if (input1 != null)
+        {
+            // Check if input1 has expired
+            if (Time.time > input1Timestamp + ElementCarrier.timePerTile)
+            {
+                input1.Destroy();
+                input1 = null;
+            }
+        }
+
         if (input1 == null && input2 == null)
         {
             input1 = new ElementCarrier(carrier);
             input1.enabled = false;
-
+            input1.moveable = false;
+            input1Timestamp = Time.time;
         }
         else if (input1 != null && input2 == null)
         {

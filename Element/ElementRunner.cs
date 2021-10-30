@@ -1,13 +1,8 @@
+#if false
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public enum CarrierTodo
-{
-    Reveal,
-    Hide,
-    Destroy
-}
 
 public partial class ElementRunner
 {
@@ -53,7 +48,7 @@ public partial class ElementRunner
                 ElementRunner.Instance.firstFrame = false;
             }
 
-            ElementRunner.Instance.UpdateCarrierPositions(pos);
+            // ElementRunner.Instance.UpdateCarrierPositions(pos);
         }
     }
 }
@@ -111,3 +106,5 @@ public partial class ElementRunner
         carriers.Remove(carrier);
     }
 }
+
+#endif

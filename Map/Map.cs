@@ -151,13 +151,14 @@ public partial class Map
     public static Vector2 FirstFrameXy(Vector2Int rc, Direction toward)
     {
         Vector2 xy = RCtoXY(rc);
+        float movement = Time.deltaTime * Map.tileWH.y / ElementCarrier.timePerTile;
         if (toward == Direction.Up)
-            return new Vector2(xy.x, xy.y - tileWH.y / 2f + ElementRunner.Instance.pos);
+            return new Vector2(xy.x, xy.y - tileWH.y / 2f + movement);
         else if (toward == Direction.Down)
-            return new Vector2(xy.x, xy.y + tileWH.y / 2f - ElementRunner.Instance.pos);
+            return new Vector2(xy.x, xy.y + tileWH.y / 2f - movement);
         else if (toward == Direction.Left)
-            return new Vector2(xy.x + tileWH.x / 2f - ElementRunner.Instance.pos, xy.y);
+            return new Vector2(xy.x + tileWH.x / 2f - movement, xy.y);
         else // toward == Direction.Right
-            return new Vector2(xy.x - tileWH.x / 2f + ElementRunner.Instance.pos, xy.y);
+            return new Vector2(xy.x - tileWH.x / 2f + movement, xy.y);
     }
 }

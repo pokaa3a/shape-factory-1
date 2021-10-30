@@ -5,7 +5,7 @@ using UnityEngine;
 public partial class Source : Module
 {
     public const string name = "Source";
-    public const float spawnPeriod = 2f;    // sec
+    public const float spawnPeriod = 1.2f;    // sec
     public ElementType elementType;
     public Direction direction;
     private GameObject directionObject;
@@ -18,21 +18,22 @@ public partial class Source : Module
     public partial class Component : MonoBehaviour
     {
         private Source source;
-        private float spawnPeriod;
+        private float spawnPeriod; // sec
         private float nextSpawnTime;
 
         public void Initialize(Source source, float spawnPeriod)
         {
             this.source = source;
             this.spawnPeriod = spawnPeriod;
-            this.nextSpawnTime = Time.time;
+            this.nextSpawnTime = Time.time + spawnPeriod;
         }
 
         void FixedUpdate()
         {
-            if (ElementRunner.Instance.firstFrame)
+            if (Time.time >= nextSpawnTime)
             {
                 source.Spawn();
+                nextSpawnTime = Time.time + spawnPeriod;
             }
         }
     }
