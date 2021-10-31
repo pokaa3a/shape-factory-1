@@ -17,8 +17,8 @@ public enum Direction
 
 public partial class Map
 {
-    public const int rows = 9;
-    public const int cols = 7;
+    public static int rows = 9;
+    public static int cols = 7;
     public static Vector2 screenWH { get; private set; }
     public static Vector2 tileWH { get; private set; }
     public static Vector2 bottomLeftTileXy { get; private set; }
@@ -73,39 +73,40 @@ public partial class Map
             }
         }
 
-        MapConfig config = MapConfig.LoadMapConfigFromScript();
-        MakeModulesByConfig(config);
+        // MapConfig config = MapConfig.LoadMapConfigFromScript();
+        Level level = LevelUtils.LoadLevel($"{Application.dataPath}/Resources/Levels/level_0.json");
+        MakeModulesByConfig(level.modules);
     }
 
-    private void MakeModulesByConfig(MapConfig config)
+    private void MakeModulesByConfig(List<ModuleConfig> configs)
     {
-        foreach (ModuleInfo info in config.modules)
+        foreach (ModuleConfig config in configs)
         {
-            switch (info)
+            switch (config.name)
             {
-                case SourceInfo sourceInfo:
-                    Source source = new Source(sourceInfo);
+                case Source.name:
+                    Source source = new Source(config);
                     break;
-                case TargetInfo targetInfo:
-                    Target target = new Target(targetInfo);
+                case Target.name:
+                    Target target = new Target(config);
                     break;
-                case MergeInfo mergeInfo:
-                    Merge merge = new Merge(mergeInfo);
+                case Merge.name:
+                    Merge merge = new Merge(config);
                     break;
-                case TurnInfo turnInfo:
-                    Turn turn = new Turn(turnInfo);
+                case Turn.name:
+                    Turn turn = new Turn(config);
                     break;
-                case RotateInfo rotateInfo:
-                    Rotate rotate = new Rotate(rotateInfo);
+                case Rotate.name:
+                    Rotate rotate = new Rotate(config);
                     break;
-                case SplitInfo splitInfo:
-                    Split split = new Split(splitInfo);
+                case Split.name:
+                    Split split = new Split(config);
                     break;
-                case PaintInfo paintInfo:
-                    Paint paint = new Paint(paintInfo);
+                case Paint.name:
+                    Paint paint = new Paint(config);
                     break;
-                case GrowInfo growInfo:
-                    Grow grow = new Grow(growInfo);
+                case Grow.name:
+                    Grow grow = new Grow(config);
                     break;
                 default: break;
             }

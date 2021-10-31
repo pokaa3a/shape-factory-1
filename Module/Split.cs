@@ -32,9 +32,9 @@ public partial class Split : Module
 
 public partial class Split : Module
 {
-    public Split(SplitInfo info) : base(info.rc)
+    public Split(ModuleConfig config) : base(config.rc)
     {
-        this.direction = info.direction;
+        this.direction = config.direction;
         gameObject.name = Split.name;
 
         Utils.SetSprite(gameObject, SpritePath.Module.split);

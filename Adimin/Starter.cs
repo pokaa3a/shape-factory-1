@@ -14,9 +14,10 @@ public class Starter
     static void OnAfterSceneLoadRuntimeMethod()
     {
         // Debug.Log("After first Scene loaded");
-        // Map.Instance.CreateMap();
+        Map.Instance.CreateMap();
+        // LevelUtils.MakeLevelAndSave();
 
-        LevelSelection.Instance.ShowSelections();
+        // LevelSelection.Instance.ShowSelections();
     }
 
     [RuntimeInitializeOnLoadMethod]

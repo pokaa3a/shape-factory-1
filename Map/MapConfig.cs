@@ -1,3 +1,4 @@
+#if false
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -115,3 +116,4 @@ public partial class MapConfig
         return config;
     }
 }
+#endif

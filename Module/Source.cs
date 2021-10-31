@@ -41,10 +41,10 @@ public partial class Source : Module
 
 public partial class Source : Module
 {
-    public Source(SourceInfo info) : base(info.rc)
+    public Source(ModuleConfig config) : base(config.rc)
     {
-        this.direction = info.direction;
-        this.elementType = info.elementType;
+        this.direction = config.direction;
+        this.elementType = config.elementType;
 
         gameObject.name = Source.name;
         component = gameObject.AddComponent<Component>();
@@ -55,7 +55,7 @@ public partial class Source : Module
 
         directionObject = new GameObject("Direction");
         Utils.SetParent(directionObject, gameObject);
-        switch (info.direction)
+        switch (config.direction)
         {
             case Direction.Up:
                 Utils.SetSprite(directionObject, SpritePath.Module.sourceUp); break;
@@ -71,7 +71,7 @@ public partial class Source : Module
 
         elementObject = new GameObject("Element");
         Utils.SetParent(elementObject, gameObject);
-        switch (info.elementType)
+        switch (config.elementType)
         {
             case ElementType.Circle:
                 Utils.SetSprite(elementObject, SpritePath.Element.Circle.white); break;

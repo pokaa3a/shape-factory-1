@@ -33,9 +33,9 @@ public partial class Rotate : Module
 
 public partial class Rotate : Module
 {
-    public Rotate(RotateInfo info) : base(info.rc)
+    public Rotate(ModuleConfig config) : base(config.rc)
     {
-        this.pose = info.pose;
+        this.pose = config.rotatePose;
         gameObject.name = Rotate.name;
     }
 

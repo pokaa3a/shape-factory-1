@@ -35,9 +35,9 @@ public partial class Merge : Module
 
 public partial class Merge : Module
 {
-    public Merge(MergeInfo info) : base(info.rc)
+    public Merge(ModuleConfig config) : base(config.rc)
     {
-        this.outputDirection = info.direction;
+        this.outputDirection = config.direction;
         gameObject.name = Merge.name;
 
         Utils.SetSprite(gameObject, SpritePath.Module.merge);

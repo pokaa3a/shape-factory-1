@@ -26,9 +26,9 @@ public partial class Grow : Module
 
 public partial class Grow : Module
 {
-    public Grow(GrowInfo info) : base(info.rc)
+    public Grow(ModuleConfig config) : base(config.rc)
     {
-        this.direction = info.direction;
+        this.direction = config.direction;
         gameObject.name = Grow.name;
 
         Utils.SetSprite(gameObject, SpritePath.Module.grow);

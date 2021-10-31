@@ -12,28 +12,14 @@ public partial class Target : Module
 
 public partial class Target : Module
 {
-    public class ElementConfig
-    {
-        public Vector2 xy;
-        public ElementType type;
-        public ElementConfig(Vector2 xy, ElementType type)
-        {
-            this.xy = xy;
-            this.type = type;
-        }
-    }
-}
-
-public partial class Target : Module
-{
-    public Target(TargetInfo info) : base(info.rc)
+    public Target(ModuleConfig config) : base(config.rc)
     {
         gameObject.name = Target.name;
         Utils.SetSprite(gameObject, SpritePath.Module.target);
         Utils.SetSpriteSortingOrder(gameObject, 2);
 
-        this.elementConfigs = info.elements;
-        MakeTargetPattern(info.elements);
+        this.elementConfigs = config.elementConfigs;
+        MakeTargetPattern(config.elementConfigs);
     }
 
     private void MakeTargetPattern(List<ElementConfig> elementConfigs)
@@ -56,7 +42,7 @@ public partial class Target : Module
             }
             Utils.SetParent(obj, this.gameObject);
             Utils.SetSpriteSortingOrder(obj, 3);
-            obj.transform.localPosition = config.xy * patternStep;
+            obj.transform.localPosition = config.pos * patternStep;
         }
     }
 }

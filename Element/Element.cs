@@ -10,6 +10,13 @@ public enum ElementType
     Cross
 }
 
+public class ElementConfig
+{
+    public Vector2 pos = Vector2.zero;
+    public ElementType type;
+    public PaintColor color;
+}
+
 public partial class Element
 {
     public GameObject gameObject;
