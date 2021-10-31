@@ -6,7 +6,7 @@ public class SpritePath
 {
     public class UI
     {
-
+        public const string levelFrame = "Sprites/UI/Level/LevelFrame";
     }
 
     public class Map
