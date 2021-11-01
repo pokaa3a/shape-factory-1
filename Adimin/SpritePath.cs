@@ -7,6 +7,7 @@ public class SpritePath
     public class UI
     {
         public const string levelFrame = "Sprites/UI/Level/LevelFrame";
+        public const string selectLevel = "Sprites/UI/GamePlayPanel/SelectLevel";
     }
 
     public class Map
@@ -48,6 +49,9 @@ public class SpritePath
 
         // Grow
         public const string grow = "Sprites/Module/grow/grow";
+
+        // Overlay
+        public const string overlay = "Sprites/Module/overlay/overlay";
     }
 
     public class Element

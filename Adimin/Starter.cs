@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Starter
 {
@@ -13,8 +14,11 @@ public class Starter
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     static void OnAfterSceneLoadRuntimeMethod()
     {
+        Scene scene = SceneManager.GetActiveScene();
+        Debug.Log($"Scene {scene.name} is loaded");
         // Debug.Log("After first Scene loaded");
         Map.Instance.CreateMap();
+        GamePlayPanel.Instance.ShowPanel();
         // LevelUtils.MakeLevelAndSave();
 
         // LevelSelection.Instance.ShowSelections();

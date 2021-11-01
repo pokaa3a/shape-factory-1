@@ -112,4 +112,15 @@ public class ModuleConfig
 
         return config;
     }
+
+    // Overlay
+    public static ModuleConfig MakeOverlayConfig(
+        Vector2Int rc,
+        Direction direction)
+    {
+        ModuleConfig config = new ModuleConfig(Overlay.name, rc);
+        config.direction = direction;
+
+        return config;
+    }
 }

@@ -149,6 +149,22 @@ public partial class Map
         return new Vector2Int(r, c);
     }
 
+    public static Vector2 XYtoUV(Vector2 xy)
+    {
+        Camera mainCam = Camera.main;
+        float v = xy.y * Screen.height / 2f / mainCam.orthographicSize;
+        float u = xy.x * Screen.width / 2f / (mainCam.orthographicSize * mainCam.aspect);
+        return new Vector2(u, v);
+    }
+
+    public static Vector2 UVtoXY(Vector2 uv)
+    {
+        Camera mainCam = Camera.main;
+        float y = uv.y * mainCam.orthographicSize / (Screen.height / 2f);
+        float x = uv.x * mainCam.orthographicSize * mainCam.aspect / (Screen.width / 2f);
+        return new Vector2(x, y);
+    }
+
     public static Vector2 FirstFrameXy(Vector2Int rc, Direction toward)
     {
         Vector2 xy = RCtoXY(rc);
