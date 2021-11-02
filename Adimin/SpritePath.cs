@@ -7,6 +7,7 @@ public class SpritePath
     public class UI
     {
         public const string levelFrame = "Sprites/UI/Level/LevelFrame";
+        public const string returnButton = "Sprites/UI/Level/Return";
         public const string selectLevel = "Sprites/UI/GamePlayPanel/SelectLevel";
     }
 

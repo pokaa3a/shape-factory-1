@@ -5,5 +5,5 @@ using UnityEngine;
 public class ObjectPath
 {
     public const string canvas = "Canvas";
-    public const string levelSelection = "LevelSelection";
+    public const string levelSelectionMenu = "LevelSelectionMenu";
 }

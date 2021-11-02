@@ -18,6 +18,6 @@ public partial class UISelectLevelButton : UIButton
 
     public override void Click()
     {
-        Debug.Log("Click Select Level Button");
+        LevelSelectionMenu.Instance.enabled = true;
     }
 }

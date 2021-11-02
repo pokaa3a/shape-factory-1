@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,8 @@ using UnityEngine.UI;
 
 public partial class UIButton
 {
-    protected GameObject gameObject;
+    public GameObject gameObject;
+    public Action clickCallBack;
 }
 
 public partial class UIButton
@@ -87,6 +89,6 @@ public partial class UIButton
 
     public virtual void Click()
     {
-
+        clickCallBack();
     }
 }
