@@ -17,8 +17,10 @@ public enum Direction
 
 public partial class Map
 {
-    public static int rows = 9;
-    public static int cols = 7;
+    public static int rows = 10;
+    public static int cols = 8;
+    public const float margin = 0.05f;
+    public const float verticalOffset = 1.2f;
     public static Vector2 screenWH { get; private set; }
     public static Vector2 tileWH { get; private set; }
     public static Vector2 bottomLeftTileXy { get; private set; }
@@ -53,11 +55,12 @@ public partial class Map
         float screenW = screenH * mainCam.aspect;
         Map.screenWH = new Vector2(screenW, screenH);
 
-        float tileSize = (screenW * 0.9f) / (float)Map.cols;
+        float tileSize = (screenW * (1 - margin)) / (float)Map.cols;
         Map.tileWH = new Vector2(tileSize, tileSize);
 
-        Map.bottomLeftTileXy = new Vector2(
-            -(Map.cols - 1) / 2f, -(Map.rows - 1) / 2f) * tileSize;
+        Map.bottomLeftTileXy =
+            new Vector2(-(Map.cols - 1) / 2f, -(Map.rows - 1) / 2f) * tileSize +
+            new Vector2(0, verticalOffset);
 
     }
 

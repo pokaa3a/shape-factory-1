@@ -42,7 +42,7 @@ public partial class LevelSelectionMenu
             // if (image == null) image = this.gameObject.AddComponent<Image>();
             // image.enabled = _enabled;
             gameObject.SetActive(_enabled);
-            gameObject.transform.SetSiblingIndex(1);
+            gameObject.transform.SetSiblingIndex(99);
         }
     }
 }
@@ -118,7 +118,7 @@ public partial class LevelSelectionMenu
     {
         UIButton returnButton = new UIButton($"Return");
         Utils.SetParent(returnButton.gameObject, this.gameObject);
-        returnButton.xy = new Vector2(0, -4f);
+        returnButton.xy = new Vector2(0, -4.3f);
         returnButton.SetSize(new Vector2(200, 200));
         returnButton.SetImage(SpritePath.UI.returnButton);
 

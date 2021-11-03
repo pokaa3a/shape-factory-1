@@ -13,7 +13,7 @@ public partial class UISelectLevelButton : UIButton
     {
         SetImage(SpritePath.UI.selectLevel);
         SetSize(new Vector2(200, 200));
-        this.xy = new Vector2(0, -4f);
+        this.xy = new Vector2(0, -4.3f);
     }
 
     public override void Click()
