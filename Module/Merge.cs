@@ -35,8 +35,9 @@ public partial class Merge : Module
 
 public partial class Merge : Module
 {
-    public Merge(ModuleConfig config) : base(config.rc)
+    public Merge(ModuleConfig config) : base(config)
     {
+        this.config = config;
         this.outputDirection = config.direction;
         gameObject.name = Merge.name;
 

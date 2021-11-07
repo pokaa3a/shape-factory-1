@@ -26,8 +26,9 @@ public partial class Grow : Module
 
 public partial class Grow : Module
 {
-    public Grow(ModuleConfig config) : base(config.rc)
+    public Grow(ModuleConfig config) : base(config)
     {
+        this.config = config;
         this.direction = config.direction;
         gameObject.name = Grow.name;
 

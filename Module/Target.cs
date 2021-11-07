@@ -12,8 +12,9 @@ public partial class Target : Module
 
 public partial class Target : Module
 {
-    public Target(ModuleConfig config) : base(config.rc)
+    public Target(ModuleConfig config) : base(config)
     {
+        this.config = config;
         gameObject.name = Target.name;
         Utils.SetSprite(gameObject, SpritePath.Module.target);
         Utils.SetSpriteSortingOrder(gameObject, 2);

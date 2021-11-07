@@ -61,8 +61,9 @@ public partial class Turn : Module
 
 public partial class Turn : Module
 {
-    public Turn(ModuleConfig config) : base(config.rc)
+    public Turn(ModuleConfig config) : base(config)
     {
+        this.config = config;
         this.pose = config.turnPose;
         this.direction = config.direction;
         gameObject.name = Turn.name;

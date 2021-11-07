@@ -35,8 +35,9 @@ public partial class Overlay : Module
 
 public partial class Overlay : Module
 {
-    public Overlay(ModuleConfig config) : base(config.rc)
+    public Overlay(ModuleConfig config) : base(config)
     {
+        this.config = config;
         gameObject.name = Overlay.name;
 
         Utils.SetSprite(gameObject, SpritePath.Module.overlay);

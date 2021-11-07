@@ -77,7 +77,8 @@ public partial class Map
         }
 
         // MapConfig config = MapConfig.LoadMapConfigFromScript();
-        Level level = LevelUtils.LoadLevel($"{Application.dataPath}/Resources/Levels/level_0.json");
+        // Level level = LevelUtils.LoadLevel($"{Application.dataPath}/Resources/Levels/level_0.json");
+        Level level = LevelUtils.MakeLevel();
         MakeModulesByConfig(level.modules);
     }
 
@@ -152,7 +153,7 @@ public partial class Map
         return new Vector2Int(r, c);
     }
 
-    public static Vector2 XYtoUV(Vector2 xy)
+    public static Vector2 XYtoUVCentered(Vector2 xy)
     {
         Camera mainCam = Camera.main;
         float v = xy.y * Screen.height / 2f / mainCam.orthographicSize;
@@ -160,12 +161,24 @@ public partial class Map
         return new Vector2(u, v);
     }
 
-    public static Vector2 UVtoXY(Vector2 uv)
+    public static Vector2 UVtoXYCentered(Vector2 uv)
     {
         Camera mainCam = Camera.main;
         float y = uv.y * mainCam.orthographicSize / (Screen.height / 2f);
         float x = uv.x * mainCam.orthographicSize * mainCam.aspect / (Screen.width / 2f);
         return new Vector2(x, y);
+    }
+
+    public static Vector2 XYtoUV(Vector2 xy)
+    {
+        Vector2 uv = XYtoUVCentered(xy);
+        uv += new Vector2(Screen.width / 2f, Screen.height / 2f);
+        return uv;
+    }
+
+    public static Vector2 UVtoXY(Vector2 uv)
+    {
+        return UVtoXYCentered(uv - new Vector2(Screen.width / 2f, Screen.height / 2f));
     }
 
     public static Vector2 FirstFrameXy(Vector2Int rc, Direction toward)

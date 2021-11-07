@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -79,35 +80,51 @@ public partial class GamePlayPanel
     private void InitializeSingleModuleButton(string name, Vector2 xy)
     {
         UIButton moduleButton = new UIButton($"Module_{name}");
+        Action clickCallback = null;
         switch (name)
         {
             case Source.name:
                 moduleButton.SetImage(SpritePath.Module.source);
+                GameObject element = new GameObject("Element");
+                Utils.SetParent(element, moduleButton.gameObject);
+                Utils.SetImage(element, SpritePath.Element.Circle.white);
+                element.GetComponent<RectTransform>().sizeDelta = new Vector2(40, 40);
+
+                clickCallback = () => { BullpenManager.Instance.SelectModule(Source.name); };
                 break;
             case Turn.name:
                 moduleButton.SetImage(SpritePath.Module.turnLeft);
+                clickCallback = () => { BullpenManager.Instance.SelectModule(Turn.name); };
                 break;
             case Merge.name:
                 moduleButton.SetImage(SpritePath.Module.merge);
+                clickCallback = () => { BullpenManager.Instance.SelectModule(Merge.name); };
                 break;
             case Split.name:
                 moduleButton.SetImage(SpritePath.Module.split);
+                clickCallback = () => { BullpenManager.Instance.SelectModule(Split.name); };
                 break;
             case Paint.name:
                 moduleButton.SetImage(SpritePath.Module.paintRed);
+                clickCallback = () => { BullpenManager.Instance.SelectModule(Paint.name); };
                 break;
             case Rotate.name:
                 moduleButton.SetImage(SpritePath.Module.rotateClockwise);
+                clickCallback = () => { BullpenManager.Instance.SelectModule(Rotate.name); };
                 break;
             case Grow.name:
                 moduleButton.SetImage(SpritePath.Module.grow);
+                clickCallback = () => { BullpenManager.Instance.SelectModule(Grow.name); };
                 break;
             case Overlay.name:
                 moduleButton.SetImage(SpritePath.Module.overlay);
+                clickCallback = () => { BullpenManager.Instance.SelectModule(Overlay.name); };
                 break;
             default:
+                clickCallback = null;
                 break;
         }
+        moduleButton.clickCallBack = clickCallback;
         moduleButton.SetSize(new Vector2(135, 135));    // TODO: Screen size adjustable
         moduleButton.xy = xy;
     }

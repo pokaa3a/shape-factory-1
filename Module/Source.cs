@@ -6,6 +6,7 @@ public partial class Source : Module
 {
     public const string name = "Source";
     public const float spawnPeriod = 1.2f;    // sec
+    public bool toSpawn = false;
     public ElementType elementType;
     public Direction direction;
     private GameObject directionObject;
@@ -41,10 +42,12 @@ public partial class Source : Module
 
 public partial class Source : Module
 {
-    public Source(ModuleConfig config) : base(config.rc)
+    public Source(ModuleConfig config) : base(config)
     {
+        this.config = config;
         this.direction = config.direction;
         this.elementType = config.elementType;
+        this.toSpawn = config.sourceSpawns;
 
         gameObject.name = Source.name;
         component = gameObject.AddComponent<Component>();
@@ -88,6 +91,8 @@ public partial class Source : Module
 
     public void Spawn()
     {
+        if (!this.toSpawn) return;
+
         Vector2 xy = Map.FirstFrameXy(this.rc, this.direction);
         ElementCarrier carrier = new ElementCarrier(elementType, PaintColor.White, xy, this.direction);
         carrier.enabled = false;

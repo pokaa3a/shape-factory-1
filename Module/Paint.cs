@@ -40,8 +40,9 @@ public partial class Paint : Module
 
 public partial class Paint : Module
 {
-    public Paint(ModuleConfig config) : base(config.rc)
+    public Paint(ModuleConfig config) : base(config)
     {
+        this.config = config;
         this.color = config.paintColor;
         gameObject.name = Paint.name;
     }

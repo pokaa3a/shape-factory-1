@@ -17,8 +17,8 @@ public partial class UIButton
     private Vector2 _xy;
     public Vector2 xy
     {
-        get => Map.UVtoXY(_uv);
-        set { uv = Map.XYtoUV(value); }
+        get => Map.UVtoXYCentered(_uv);
+        set { uv = Map.XYtoUVCentered(value); }
     }
 
     private Vector2 _uv;

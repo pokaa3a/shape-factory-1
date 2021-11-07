@@ -19,6 +19,7 @@ public class Starter
         // Debug.Log("After first Scene loaded");
         Map.Instance.CreateMap();
         GamePlayPanel.Instance.ShowPanel();
+        BullpenManager.Instance.Initialize();
         // LevelUtils.MakeLevelAndSave();
 
         // LevelSelection.Instance.ShowSelections();

@@ -6,27 +6,27 @@ using UnityEngine;
 public class ModuleConfig
 {
     public string name;
+    public bool inMap = true;
     public Vector2Int rc;
     public ElementType elementType;
+    public bool sourceSpawns = false;
     public Direction direction;
     public TurnPose turnPose;
     public RotatePose rotatePose;
     public PaintColor paintColor;
     public List<ElementConfig> elementConfigs;
 
-    public ModuleConfig(string name, Vector2Int rc)
+    public ModuleConfig(string name)
     {
         this.name = name;
-        this.rc = rc;
     }
 
     // Source
     public static ModuleConfig MakeSourceConfig(
-        Vector2Int rc,
         Direction direction,
         ElementType elementType)
     {
-        ModuleConfig config = new ModuleConfig(Source.name, rc);
+        ModuleConfig config = new ModuleConfig(Source.name);
         config.direction = direction;
         config.elementType = elementType;
 
@@ -35,10 +35,9 @@ public class ModuleConfig
 
     // Target
     public static ModuleConfig MakeTargetConfig(
-        Vector2Int rc,
         List<ElementConfig> elementConfigs)
     {
-        ModuleConfig config = new ModuleConfig(Target.name, rc);
+        ModuleConfig config = new ModuleConfig(Target.name);
         config.elementConfigs = elementConfigs;
 
         return config;
@@ -47,11 +46,10 @@ public class ModuleConfig
 
     // Turn
     public static ModuleConfig MakeTurnConfig(
-        Vector2Int rc,
         Direction direction,
         TurnPose turnPose)
     {
-        ModuleConfig config = new ModuleConfig(Turn.name, rc);
+        ModuleConfig config = new ModuleConfig(Turn.name);
         config.direction = direction;
         config.turnPose = turnPose;
 
@@ -60,10 +58,9 @@ public class ModuleConfig
 
     // Merge
     public static ModuleConfig MakeMergeConfig(
-        Vector2Int rc,
         Direction direction)
     {
-        ModuleConfig config = new ModuleConfig(Merge.name, rc);
+        ModuleConfig config = new ModuleConfig(Merge.name);
         config.direction = direction;
 
         return config;
@@ -71,10 +68,9 @@ public class ModuleConfig
 
     // Split
     public static ModuleConfig MakeSplitConfig(
-        Vector2Int rc,
         Direction direction)
     {
-        ModuleConfig config = new ModuleConfig(Split.name, rc);
+        ModuleConfig config = new ModuleConfig(Split.name);
         config.direction = direction;
 
         return config;
@@ -82,10 +78,9 @@ public class ModuleConfig
 
     // Rotate
     public static ModuleConfig MakeRotateConfig(
-        Vector2Int rc,
         RotatePose rotatePose)
     {
-        ModuleConfig config = new ModuleConfig(Rotate.name, rc);
+        ModuleConfig config = new ModuleConfig(Rotate.name);
         config.rotatePose = rotatePose;
 
         return config;
@@ -93,10 +88,9 @@ public class ModuleConfig
 
     // Paint
     public static ModuleConfig MakePaintConfig(
-        Vector2Int rc,
         PaintColor color)
     {
-        ModuleConfig config = new ModuleConfig(Paint.name, rc);
+        ModuleConfig config = new ModuleConfig(Paint.name);
         config.paintColor = color;
 
         return config;
@@ -104,10 +98,9 @@ public class ModuleConfig
 
     // Grow
     public static ModuleConfig MakeGrowConfig(
-        Vector2Int rc,
         Direction direction)
     {
-        ModuleConfig config = new ModuleConfig(Grow.name, rc);
+        ModuleConfig config = new ModuleConfig(Grow.name);
         config.direction = direction;
 
         return config;
@@ -115,10 +108,9 @@ public class ModuleConfig
 
     // Overlay
     public static ModuleConfig MakeOverlayConfig(
-        Vector2Int rc,
         Direction direction)
     {
-        ModuleConfig config = new ModuleConfig(Overlay.name, rc);
+        ModuleConfig config = new ModuleConfig(Overlay.name);
         config.direction = direction;
 
         return config;

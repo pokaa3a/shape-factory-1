@@ -32,8 +32,9 @@ public partial class Split : Module
 
 public partial class Split : Module
 {
-    public Split(ModuleConfig config) : base(config.rc)
+    public Split(ModuleConfig config) : base(config)
     {
+        this.config = config;
         this.direction = config.direction;
         gameObject.name = Split.name;
 

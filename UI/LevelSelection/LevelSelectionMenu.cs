@@ -122,7 +122,10 @@ public partial class LevelSelectionMenu
         returnButton.SetSize(new Vector2(200, 200));
         returnButton.SetImage(SpritePath.UI.returnButton);
 
-        Action clickReturn = () => { this.enabled = false; };
+        Action clickReturn = () =>
+        {
+            this.enabled = false;
+        };
         returnButton.clickCallBack = clickReturn;
     }
 }

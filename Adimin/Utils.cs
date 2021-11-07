@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Utils
 {
@@ -10,6 +11,16 @@ public class Utils
         if (sprRend == null)
             sprRend = obj.AddComponent<SpriteRenderer>();
         sprRend.sprite = Resources.Load<Sprite>(spritePath);
+    }
+
+    public static void SetImage(GameObject obj, string spritePath)
+    {
+        Image image = obj.GetComponent<Image>();
+        if (image == null)
+        {
+            image = obj.AddComponent<Image>();
+        }
+        image.sprite = Resources.Load<Sprite>(spritePath);
     }
 
     public static void SetSpriteSortingOrder(GameObject obj, int idx)
