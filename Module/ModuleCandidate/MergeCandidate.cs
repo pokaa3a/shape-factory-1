@@ -6,19 +6,31 @@ public partial class MergeCandidate : CandidateBase
 {
     public MergeCandidate()
     {
-        // ModuleConfig config = new ModuleConfig();
-        // config.name = Merge.name;
-        // mergeCandidate = new ModuleCandidate(config);
-        // mergeCandidate.xy = new Vector2(0, verticalPos);
+        this.name = Merge.name;
 
-        // this.Disable();
+        Module candidate = MakeMergeCandidate();
+        candidates.Add(candidate);
+
+        this.Disable();
+    }
+
+    private Module MakeMergeCandidate()
+    {
+        ModuleConfig config = ModuleConfig.MakeMergeConfig(
+            Direction.Up);
+        config.inMap = false;
+
+        Module candidate = new Merge(config);
+        candidate.xy = new Vector2(0, verticalPos);
+
+        return candidate;
     }
 }
 
 public partial class MergeCandidate : CandidateBase
 {
-    public override void ReleaseCandidate()
+    public override void ReleaseCandidate(Module module)
     {
-
+        candidates[0] = MakeMergeCandidate();
     }
 }

@@ -6,19 +6,30 @@ public partial class OverlayCandidate : CandidateBase
 {
     public OverlayCandidate()
     {
-        // ModuleConfig config = new ModuleConfig();
-        // config.name = Overlay.name;
-        // overlayCandidate = new ModuleCandidate(config);
-        // overlayCandidate.xy = new Vector2(0, verticalPos);
+        this.name = Overlay.name;
 
-        // this.Disable();
+        Module candidate = MakeOverlayCandidate();
+        candidates.Add(candidate);
+
+        this.Disable();
+    }
+
+    private Module MakeOverlayCandidate()
+    {
+        ModuleConfig config = ModuleConfig.MakeOverlayConfig();
+        config.inMap = false;
+
+        Module candidate = new Overlay(config);
+        candidate.xy = new Vector2(0, verticalPos);
+
+        return candidate;
     }
 }
 
 public partial class OverlayCandidate : CandidateBase
 {
-    public override void ReleaseCandidate()
+    public override void ReleaseCandidate(Module module)
     {
-
+        candidates[0] = MakeOverlayCandidate();
     }
 }

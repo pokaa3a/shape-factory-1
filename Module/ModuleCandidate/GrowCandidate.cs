@@ -6,19 +6,30 @@ public partial class GrowCandidate : CandidateBase
 {
     public GrowCandidate()
     {
-        // ModuleConfig config = new ModuleConfig();
-        // config = Grow.name;
-        // growCandidate = new ModuleCandidate(config);
-        // growCandidate.xy = new Vector2(0, verticalPos);
+        this.name = Grow.name;
+
+        Module candidate = MakeGrowCandidate();
+        candidates.Add(candidate);
 
         this.Disable();
+    }
+
+    private Module MakeGrowCandidate()
+    {
+        ModuleConfig config = ModuleConfig.MakeGrowConfig(Direction.Up);
+        config.inMap = false;
+
+        Module candidate = new Grow(config);
+        candidate.xy = new Vector2(0, verticalPos);
+
+        return candidate;
     }
 }
 
 public partial class GrowCandidate : CandidateBase
 {
-    public override void ReleaseCandidate()
+    public override void ReleaseCandidate(Module module)
     {
-
+        candidates[0] = MakeGrowCandidate();
     }
 }

@@ -26,5 +26,5 @@ public abstract class CandidateBase
         }
     }
 
-    public abstract void ReleaseCandidate();
+    public abstract void ReleaseCandidate(Module module);
 }

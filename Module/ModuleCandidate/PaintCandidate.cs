@@ -6,42 +6,57 @@ public partial class PaintCandidate : CandidateBase
 {
     public PaintCandidate()
     {
-        // // Blue
-        // ModuleConfig config0 = new ModuleConfig();
-        // config0.name = Paint.name;
-        // config0.paintColor = PaintColor.Blue;
-        // paintCandidate0 = new ModuleCandidate(config0);
-        // paintCandidate0.xy = new Vector2(-0.9f, verticalPos);
+        this.name = Paint.name;
 
-        // // Red
-        // ModuleConfig config1 = new ModuleConfig();
-        // config1.name = Paint.name;
-        // config1.paintColor = PaintColor.Red;
-        // paintCandidate1 = new ModuleCandidate(config1);
-        // paintCandidate1.xy = new Vector2(-0.3f, verticalPos);
+        Module candidate0 = MakePaintCandidata(PaintColor.Blue);
+        Module candidate1 = MakePaintCandidata(PaintColor.Red);
+        Module candidate2 = MakePaintCandidata(PaintColor.Yellow);
+        Module candidate3 = MakePaintCandidata(PaintColor.White);
 
-        // // Yellow
-        // ModuleConfig config2 = new ModuleConfig();
-        // config2.name = Paint.name;
-        // config2.paintColor = PaintColor.Yellow;
-        // paintCandidate2 = new ModuleCandidate(config2);
-        // paintCandidate2.xy = new Vector2(0.3f, verticalPos);
+        candidates.Add(candidate0);
+        candidates.Add(candidate1);
+        candidates.Add(candidate2);
+        candidates.Add(candidate3);
 
-        // // White
-        // ModuleConfig config3 = new ModuleConfig();
-        // config3.name = Paint.name;
-        // config3.paintColor = PaintColor.White;
-        // paintCandidate3 = new ModuleCandidate(config3);
-        // paintCandidate3.xy = new Vector2(0.9f, verticalPos);
+        this.Disable();
+    }
 
-        // this.Disable();
+    private Module MakePaintCandidata(PaintColor color)
+    {
+        Vector2 xy = Vector2.zero;
+        if (color == PaintColor.Blue)
+        {
+            xy = new Vector2(-0.9f, verticalPos);
+        }
+        else if (color == PaintColor.Red)
+        {
+            xy = new Vector2(-0.3f, verticalPos);
+        }
+        else if (color == PaintColor.Yellow)
+        {
+            xy = new Vector2(0.3f, verticalPos);
+        }
+        else    // white
+        {
+            xy = new Vector2(0.9f, verticalPos);
+        }
+
+        ModuleConfig config = ModuleConfig.MakePaintConfig(color);
+        config.inMap = false;
+
+        Module candidate = new Paint(config);
+        candidate.xy = xy;
+
+        return candidate;
     }
 }
 
 public partial class PaintCandidate : CandidateBase
 {
-    public override void ReleaseCandidate()
+    public override void ReleaseCandidate(Module module)
     {
-
+        int found = candidates.FindIndex(
+            x => x.config.paintColor == module.config.paintColor);
+        candidates[found] = MakePaintCandidata(module.config.paintColor);
     }
 }

@@ -65,11 +65,11 @@ public partial class BullpenManager
         nameToCandiate.Add(Grow.name, grow);
     }
 
-    public void ReleaseModule()
+    public void ReleaseModule(Module module)
     {
         if (currentCandidate != null)
         {
-            currentCandidate.ReleaseCandidate();
+            currentCandidate.ReleaseCandidate(module);
         }
     }
 

@@ -31,7 +31,6 @@ public partial class Module
         {
             _enabled = value;
             gameObject.SetActive(_enabled);
-            Debug.Log($"SetActive {config.name} to {_enabled}");
         }
     }
 }
@@ -64,7 +63,7 @@ public partial class Module
             {
                 Destroy(gameObject);
             }
-            BullpenManager.Instance.ReleaseModule();
+            BullpenManager.Instance.ReleaseModule(module);
         }
 
         public void OnBeginDrag(PointerEventData data)

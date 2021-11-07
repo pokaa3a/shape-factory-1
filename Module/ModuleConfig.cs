@@ -57,8 +57,7 @@ public class ModuleConfig
     }
 
     // Merge
-    public static ModuleConfig MakeMergeConfig(
-        Direction direction)
+    public static ModuleConfig MakeMergeConfig(Direction direction)
     {
         ModuleConfig config = new ModuleConfig(Merge.name);
         config.direction = direction;
@@ -67,8 +66,7 @@ public class ModuleConfig
     }
 
     // Split
-    public static ModuleConfig MakeSplitConfig(
-        Direction direction)
+    public static ModuleConfig MakeSplitConfig(Direction direction)
     {
         ModuleConfig config = new ModuleConfig(Split.name);
         config.direction = direction;
@@ -77,8 +75,7 @@ public class ModuleConfig
     }
 
     // Rotate
-    public static ModuleConfig MakeRotateConfig(
-        RotatePose rotatePose)
+    public static ModuleConfig MakeRotateConfig(RotatePose rotatePose)
     {
         ModuleConfig config = new ModuleConfig(Rotate.name);
         config.rotatePose = rotatePose;
@@ -87,8 +84,7 @@ public class ModuleConfig
     }
 
     // Paint
-    public static ModuleConfig MakePaintConfig(
-        PaintColor color)
+    public static ModuleConfig MakePaintConfig(PaintColor color)
     {
         ModuleConfig config = new ModuleConfig(Paint.name);
         config.paintColor = color;
@@ -97,8 +93,7 @@ public class ModuleConfig
     }
 
     // Grow
-    public static ModuleConfig MakeGrowConfig(
-        Direction direction)
+    public static ModuleConfig MakeGrowConfig(Direction direction)
     {
         ModuleConfig config = new ModuleConfig(Grow.name);
         config.direction = direction;
@@ -107,12 +102,9 @@ public class ModuleConfig
     }
 
     // Overlay
-    public static ModuleConfig MakeOverlayConfig(
-        Direction direction)
+    public static ModuleConfig MakeOverlayConfig()
     {
         ModuleConfig config = new ModuleConfig(Overlay.name);
-        config.direction = direction;
-
         return config;
     }
 }

@@ -8,10 +8,10 @@ public partial class SourceCandidate : CandidateBase
     {
         this.name = Source.name;
 
-        Module candidate0 = AddSourceCandidate(ElementType.Circle);
-        Module candidate1 = AddSourceCandidate(ElementType.Cross);
-        Module candidate2 = AddSourceCandidate(ElementType.Square);
-        Module candidate3 = AddSourceCandidate(ElementType.Triangle);
+        Module candidate0 = MakeSourceCandidate(ElementType.Circle);
+        Module candidate1 = MakeSourceCandidate(ElementType.Cross);
+        Module candidate2 = MakeSourceCandidate(ElementType.Square);
+        Module candidate3 = MakeSourceCandidate(ElementType.Triangle);
 
         candidates.Add(candidate0);
         candidates.Add(candidate1);
@@ -21,47 +21,41 @@ public partial class SourceCandidate : CandidateBase
         this.Disable();
     }
 
-    private Module AddSourceCandidate(ElementType elementType)
+    private Module MakeSourceCandidate(ElementType elementType)
     {
-        ModuleConfig config = new ModuleConfig(Source.name);
-        config.inMap = false;
         Vector2 xy = Vector2.zero;
         if (elementType == ElementType.Circle)
         {
-            config.elementType = ElementType.Circle;
             xy = new Vector2(-0.9f, verticalPos);
         }
         else if (elementType == ElementType.Cross)
         {
-            config.elementType = ElementType.Cross;
             xy = new Vector2(-0.3f, verticalPos);
         }
         else if (elementType == ElementType.Square)
         {
-            config.elementType = ElementType.Square;
             xy = new Vector2(0.3f, verticalPos);
         }
         else if (elementType == ElementType.Triangle)
         {
-            config.elementType = ElementType.Triangle;
             xy = new Vector2(0.9f, verticalPos);
         }
+
+        ModuleConfig config = ModuleConfig.MakeSourceConfig(
+            Direction.Up,
+            elementType);
+        config.inMap = false;
+
         Module candidate = new Source(config);
         candidate.xy = xy;
 
         return candidate;
     }
 
-    public override void ReleaseCandidate()
+    public override void ReleaseCandidate(Module module)
     {
-        for (int i = 0; i < candidates.Count; ++i)
-        {
-            if (Map.InsideMap(candidates[i].xy))
-            {
-                // If this module is inside the map, then create a new module
-                // in candidates.
-                candidates[i] = AddSourceCandidate(candidates[i].config.elementType);
-            }
-        }
+        int found = candidates.FindIndex(
+            x => x.config.elementType == module.config.elementType);
+        candidates[found] = MakeSourceCandidate(module.config.elementType);
     }
 }
