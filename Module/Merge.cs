@@ -14,20 +14,20 @@ public partial class Merge : Module
 
 public partial class Merge : Module
 {
-    private Direction _outputDirection;
-    public Direction outputDirection
+    private Direction _direction;
+    public Direction direction
     {
-        get => _outputDirection;
+        get => _direction;
         set
         {
-            _outputDirection = value;
-            if (_outputDirection == Direction.Up)
+            _direction = value;
+            if (_direction == Direction.Up)
                 gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-            else if (_outputDirection == Direction.Left)
+            else if (_direction == Direction.Left)
                 gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);
-            else if (_outputDirection == Direction.Down)
+            else if (_direction == Direction.Down)
                 gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
-            else if (_outputDirection == Direction.Right)
+            else if (_direction == Direction.Right)
                 gameObject.transform.rotation = Quaternion.Euler(0, 0, 270);
         }
     }
@@ -38,7 +38,7 @@ public partial class Merge : Module
     public Merge(ModuleConfig config) : base(config)
     {
         this.config = config;
-        this.outputDirection = config.direction;
+        this.direction = config.direction;
         gameObject.name = Merge.name;
 
         Utils.SetSprite(gameObject, SpritePath.Module.merge);
@@ -73,7 +73,7 @@ public partial class Merge : Module
             ElementCarrier mergedCarrier = MergeCarriers(input1, input2);
             if (mergedCarrier != null)
             {
-                mergedCarrier.xy = Map.FirstFrameXy(this.rc, this.outputDirection);
+                mergedCarrier.xy = Map.FirstFrameXy(this.rc, this.direction);
                 mergedCarrier.enabled = false;
             }
 
@@ -95,15 +95,15 @@ public partial class Merge : Module
         if (here.direction == there.direction) return null;
 
         // Invalid if any carriers coming from the conflicting direction
-        if (here.direction == GetOppositeDirection(this.outputDirection) ||
-            there.direction == GetOppositeDirection(this.outputDirection))
+        if (here.direction == GetOppositeDirection(this.direction) ||
+            there.direction == GetOppositeDirection(this.direction))
             return null;
 
-        if (there.direction == this.outputDirection)
+        if (there.direction == this.direction)
             return MergeCarriers(there, here);
 
         ElementCarrier merged = MergeCarriersFrom(here, there, here.direction);
-        merged.direction = this.outputDirection;
+        merged.direction = this.direction;
 
         return merged;
     }
@@ -228,5 +228,13 @@ public partial class Merge : Module
         else if (input == Direction.Down) return Direction.Up;
         else if (input == Direction.Left) return Direction.Right;
         else return Direction.Left;
+    }
+
+    public override void ClockwiseRotate()
+    {
+        if (direction == Direction.Up) direction = Direction.Right;
+        else if (direction == Direction.Right) direction = Direction.Down;
+        else if (direction == Direction.Down) direction = Direction.Left;
+        else /* Direction.Left */ direction = Direction.Up;
     }
 }

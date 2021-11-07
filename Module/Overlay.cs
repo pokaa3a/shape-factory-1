@@ -14,20 +14,20 @@ public partial class Overlay : Module
 
 public partial class Overlay : Module
 {
-    private Direction _outputDirection;
-    public Direction outputDirection
+    private Direction _direction;
+    public Direction direction
     {
-        get => _outputDirection;
+        get => _direction;
         set
         {
-            _outputDirection = value;
-            if (_outputDirection == Direction.Up)
+            _direction = value;
+            if (_direction == Direction.Up)
                 gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-            else if (_outputDirection == Direction.Left)
+            else if (_direction == Direction.Left)
                 gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);
-            else if (_outputDirection == Direction.Down)
+            else if (_direction == Direction.Down)
                 gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
-            else if (_outputDirection == Direction.Right)
+            else if (_direction == Direction.Right)
                 gameObject.transform.rotation = Quaternion.Euler(0, 0, 270);
         }
     }
@@ -71,7 +71,7 @@ public partial class Overlay : Module
                 ElementCarrier overlaidCarrier = OverlayCarriers(input1, input2);
                 if (overlaidCarrier != null)
                 {
-                    overlaidCarrier.xy = Map.FirstFrameXy(this.rc, this.outputDirection);
+                    overlaidCarrier.xy = Map.FirstFrameXy(this.rc, this.direction);
                     overlaidCarrier.enabled = false;
                 }
 
@@ -90,5 +90,13 @@ public partial class Overlay : Module
     {
         // TODO: Implement this function
         return null;
+    }
+
+    public override void ClockwiseRotate()
+    {
+        if (direction == Direction.Up) direction = Direction.Right;
+        else if (direction == Direction.Right) direction = Direction.Down;
+        else if (direction == Direction.Down) direction = Direction.Left;
+        else /* Direction.Left */ direction = Direction.Up;
     }
 }

@@ -45,6 +45,8 @@ public partial class Turn : Module
                     gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
                 else if (_direction == Direction.Up)
                     gameObject.transform.rotation = Quaternion.Euler(0, 0, 270);
+                else
+                    gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
             }
             else    // TurnRight
             {
@@ -54,6 +56,8 @@ public partial class Turn : Module
                     gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
                 else if (_direction == Direction.Down)
                     gameObject.transform.rotation = Quaternion.Euler(0, 0, 270);
+                else
+                    gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
             }
         }
     }
@@ -105,5 +109,13 @@ public partial class Turn : Module
             else return CarrierTodo.Destroy;
         }
         return CarrierTodo.Hide;
+    }
+
+    public override void ClockwiseRotate()
+    {
+        if (direction == Direction.Up) direction = Direction.Right;
+        else if (direction == Direction.Right) direction = Direction.Down;
+        else if (direction == Direction.Down) direction = Direction.Left;
+        else /* Direction.Left */ direction = Direction.Up;
     }
 }

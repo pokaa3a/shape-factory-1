@@ -30,6 +30,7 @@ public partial class SplitCandidate : CandidateBase
 {
     public override void ReleaseCandidate(Module module)
     {
-        candidates[0] = MakeSplitCandidate();
+        if (candidates[0] == module)
+            candidates[0] = MakeSplitCandidate();
     }
 }

@@ -54,8 +54,8 @@ public partial class SourceCandidate : CandidateBase
 
     public override void ReleaseCandidate(Module module)
     {
-        int found = candidates.FindIndex(
-            x => x.config.elementType == module.config.elementType);
-        candidates[found] = MakeSourceCandidate(module.config.elementType);
+        int found = candidates.FindIndex(x => x == module);
+        if (found >= 0)
+            candidates[found] = MakeSourceCandidate(module.config.elementType);
     }
 }

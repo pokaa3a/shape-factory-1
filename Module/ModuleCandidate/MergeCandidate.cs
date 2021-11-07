@@ -31,6 +31,6 @@ public partial class MergeCandidate : CandidateBase
 {
     public override void ReleaseCandidate(Module module)
     {
-        candidates[0] = MakeMergeCandidate();
+        if (candidates[0] == module) candidates[0] = MakeMergeCandidate();
     }
 }

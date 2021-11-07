@@ -34,6 +34,14 @@ public partial class Tile
     {
         this.module = module;
         Utils.SetParent(module.gameObject, gameObject);
+
+        module.rc = this.rc;
+        module.LandInMap();
+    }
+
+    public void RemoveModuleFromTile()
+    {
+        this.module = null;
     }
 
     public CarrierTodo AcknowledgeTile(ElementCarrier elementCarrier)

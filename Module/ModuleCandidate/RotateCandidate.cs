@@ -43,8 +43,8 @@ public partial class RotateCandidate : CandidateBase
 {
     public override void ReleaseCandidate(Module module)
     {
-        int found = candidates.FindIndex(
-            x => x.config.rotatePose == module.config.rotatePose);
-        candidates[found] = MakeRotateCandidate(module.config.rotatePose);
+        int found = candidates.FindIndex(x => x == module);
+        if (found >= 0)
+            candidates[found] = MakeRotateCandidate(module.config.rotatePose);
     }
 }

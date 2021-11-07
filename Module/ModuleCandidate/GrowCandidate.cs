@@ -30,6 +30,6 @@ public partial class GrowCandidate : CandidateBase
 {
     public override void ReleaseCandidate(Module module)
     {
-        candidates[0] = MakeGrowCandidate();
+        if (candidates[0] == module) candidates[0] = MakeGrowCandidate();
     }
 }

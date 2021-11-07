@@ -97,4 +97,22 @@ public partial class Source : Module
         ElementCarrier carrier = new ElementCarrier(elementType, PaintColor.White, xy, this.direction);
         carrier.enabled = false;
     }
+
+    public override void BeginDragging()
+    {
+        this.toSpawn = false;
+    }
+
+    public override void LandInMap()
+    {
+        this.toSpawn = true;
+    }
+
+    public override void ClockwiseRotate()
+    {
+        if (direction == Direction.Up) direction = Direction.Right;
+        else if (direction == Direction.Right) direction = Direction.Down;
+        else if (direction == Direction.Down) direction = Direction.Left;
+        else /* Direction.Left */ direction = Direction.Up;
+    }
 }

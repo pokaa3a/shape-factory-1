@@ -170,4 +170,12 @@ public partial class Split : Module
         else // this.direction == Direction.Left
             return Direction.Up;
     }
+
+    public override void ClockwiseRotate()
+    {
+        if (direction == Direction.Up) direction = Direction.Right;
+        else if (direction == Direction.Right) direction = Direction.Down;
+        else if (direction == Direction.Down) direction = Direction.Left;
+        else /* Direction.Left */ direction = Direction.Up;
+    }
 }

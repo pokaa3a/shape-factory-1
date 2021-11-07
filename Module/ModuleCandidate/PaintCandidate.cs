@@ -55,8 +55,8 @@ public partial class PaintCandidate : CandidateBase
 {
     public override void ReleaseCandidate(Module module)
     {
-        int found = candidates.FindIndex(
-            x => x.config.paintColor == module.config.paintColor);
-        candidates[found] = MakePaintCandidata(module.config.paintColor);
+        int found = candidates.FindIndex(x => x == module);
+        if (found >= 0)
+            candidates[found] = MakePaintCandidata(module.config.paintColor);
     }
 }

@@ -46,8 +46,8 @@ public partial class TurnCandidate : CandidateBase
 
     public override void ReleaseCandidate(Module module)
     {
-        int found = candidates.FindIndex(
-            x => x.config.turnPose == module.config.turnPose);
-        candidates[found] = MakeTurnCandidate(module.config.turnPose);
+        int found = candidates.FindIndex(x => x == module);
+        if (found >= 0)
+            candidates[found] = MakeTurnCandidate(module.config.turnPose);
     }
 }

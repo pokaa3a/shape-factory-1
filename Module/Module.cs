@@ -8,6 +8,7 @@ public partial class Module
     public Vector2Int rc;
     public GameObject gameObject;
     public ModuleConfig config;
+    public bool inMap = false;
 }
 
 public partial class Module
@@ -41,6 +42,7 @@ public partial class Module
         IPointerDownHandler, IPointerUpHandler, IBeginDragHandler, IDragHandler
     {
         public Module module;
+        private bool onDragging = false;
 
         //Detect current clicks on the GameObject (the one with the script attached)
         public void OnPointerDown(PointerEventData pointerEventData)
@@ -52,6 +54,13 @@ public partial class Module
         //Detect if clicks are no longer registering
         public void OnPointerUp(PointerEventData pointerEventData)
         {
+            if (!onDragging)
+            {
+                // Simply click down and up without dragging
+                module.ClockwiseRotate();
+                return;
+            }
+
             // Debug.Log("No longer being clicked");
             if (Map.InsideMap(module.xy))
             {
@@ -64,6 +73,7 @@ public partial class Module
                 Destroy(gameObject);
             }
             BullpenManager.Instance.ReleaseModule(module);
+            onDragging = false;
         }
 
         public void OnBeginDrag(PointerEventData data)
@@ -76,6 +86,10 @@ public partial class Module
 
             // data.pointerDrag = draggableModule.gameObject;
             // data.pointerPress = draggableModule.gameObject;
+            onDragging = true;
+            module.BeginDragging();
+            Vector2Int rc = Map.XYtoRC(module.xy);
+            Map.Instance.GetTile(rc).RemoveModuleFromTile();
         }
 
         // According to Unity's manual, IDragHandler needs to be implemented
@@ -93,7 +107,8 @@ public partial class Module
     public Module(ModuleConfig config)
     {
         gameObject = new GameObject("Module");
-        if (config.inMap)
+        this.inMap = config.inMap;
+        if (this.inMap)
         {
             this.rc = config.rc;
             Map.Instance.GetTile(rc).AddModuleToTile(this);
@@ -109,4 +124,11 @@ public partial class Module
     {
         return CarrierTodo.Destroy;
     }
+
+    public virtual void BeginDragging() { }
+    public virtual void LandInMap()
+    {
+        this.inMap = true;
+    }
+    public virtual void ClockwiseRotate() { }
 }
