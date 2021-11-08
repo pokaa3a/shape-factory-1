@@ -54,20 +54,28 @@ public partial class LevelSelectionMenu
         // gameObject = GameObject.Find(ObjectPath.levelSelectionMenu);
         // Assert.IsNotNull(gameObject);
         gameObject = new GameObject("LevelSelectionMenu");
-        GameObject canvas = GameObject.Find(ObjectPath.canvas);
-        Assert.IsNotNull(canvas);
-        Utils.SetParent(gameObject, canvas);
+        GameObject mainCanvas = GameObject.Find(ObjectPath.canvas);
+        Assert.IsNotNull(mainCanvas);
+        Utils.SetParent(gameObject, mainCanvas);
         RectTransform rectTransform = gameObject.AddComponent<RectTransform>();
+
         // Stretch
         rectTransform.offsetMin = Vector2.zero;
         rectTransform.offsetMax = Vector2.zero;
         rectTransform.anchorMin = Vector2.zero;
         rectTransform.anchorMax = new Vector2(1, 1);
+
         // Image
         Image image = gameObject.AddComponent<Image>();
         Color imgColor;
         ColorUtility.TryParseHtmlString("#333333", out imgColor);
         image.color = imgColor;
+
+        // Add Canvas
+        Canvas canvas = gameObject.AddComponent<Canvas>();
+        GraphicRaycaster graphicRaycaster = gameObject.AddComponent<GraphicRaycaster>();
+        canvas.overrideSorting = true;
+        canvas.sortingOrder = 5;
 
         buttonStep = (Screen.width * (1f - margin)) / (levelsPerRow - 1);
         topLeft = new Vector2(
