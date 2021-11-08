@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class LevelUtils
@@ -90,8 +91,17 @@ public class LevelUtils
         return level;
     }
 
+    public static Level LoadLevel(int number)
+    {
+        Debug.Log($"[LevelUtils] Load level {number}");
+        string inputPath = $"{Application.dataPath}/Resources/Levels/level_{number}.json";
+        return LoadLevel(inputPath);
+    }
+
     public static Level LoadLevel(string input)
     {
+        if (!File.Exists(input)) return new Level();
+
         string jsonStr = System.IO.File.ReadAllText(input);
         return JsonUtility.FromJson<Level>(jsonStr);
     }

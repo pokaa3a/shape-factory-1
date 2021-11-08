@@ -44,6 +44,12 @@ public partial class Tile
         this.module = null;
     }
 
+    public void DestroyModelFromTile()
+    {
+        if (this.module != null) this.module.Destroy();
+        RemoveModuleFromTile();
+    }
+
     public CarrierTodo AcknowledgeTile(ElementCarrier elementCarrier)
     {
         if (module == null) return CarrierTodo.Reveal;

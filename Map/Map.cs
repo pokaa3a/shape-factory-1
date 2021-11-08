@@ -62,10 +62,6 @@ public partial class Map
             new Vector2(-(Map.cols - 1) / 2f, -(Map.rows - 1) / 2f) * tileSize +
             new Vector2(0, verticalOffset);
 
-    }
-
-    public void CreateMap()
-    {
         // Create tiles
         for (int r = 0; r < rows; ++r)
         {
@@ -75,10 +71,31 @@ public partial class Map
                 tiles.Add(tile);
             }
         }
+    }
 
+    public void CreateMap()
+    {
         // MapConfig config = MapConfig.LoadMapConfigFromScript();
         // Level level = LevelUtils.LoadLevel($"{Application.dataPath}/Resources/Levels/level_0.json");
         Level level = LevelUtils.MakeLevel();
+        MakeModulesByConfig(level.modules);
+    }
+
+    public void CleanMap()
+    {
+        Debug.Log("[Map] CleanMap");
+        for (int r = 0; r < rows; ++r)
+        {
+            for (int c = 0; c < cols; ++c)
+            {
+                GetTile(new Vector2Int(r, c)).DestroyModelFromTile();
+            }
+        }
+    }
+
+    public void CreateMapFromLevel(Level level)
+    {
+        CleanMap();
         MakeModulesByConfig(level.modules);
     }
 

@@ -9,6 +9,7 @@ public partial class Module
     public GameObject gameObject;
     public ModuleConfig config;
     public bool inMap = false;
+    private ModuleComponent component;
 }
 
 public partial class Module
@@ -99,6 +100,11 @@ public partial class Module
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(data.position);
             module.xy = worldPosition;
         }
+
+        public void Destroy()
+        {
+            Destroy(gameObject);
+        }
     }
 }
 
@@ -114,10 +120,15 @@ public partial class Module
             Map.Instance.GetTile(rc).AddModuleToTile(this);
         }
 
-        ModuleComponent component = gameObject.AddComponent<ModuleComponent>();
+        component = gameObject.AddComponent<ModuleComponent>();
         component.module = this;
         BoxCollider2D boxCollider = gameObject.AddComponent<BoxCollider2D>();
         boxCollider.size = Map.tileWH;
+    }
+
+    public void Destroy()
+    {
+        this.component.Destroy();
     }
 
     public virtual CarrierTodo AcknowledgeModule(ElementCarrier carrier)

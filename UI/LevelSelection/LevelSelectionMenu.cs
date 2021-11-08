@@ -94,28 +94,10 @@ public partial class LevelSelectionMenu
         {
             for (int c = 0; c < levelsPerRow; ++c)
             {
-                UIButton button = new UIButton($"LevelButton_{id}");
+                LevelButton button = new LevelButton(
+                        id, new Vector2(buttonStep * 0.6f, buttonStep * 0.6f));
                 Utils.SetParent(button.gameObject, this.gameObject);
-                button.uv = topLeft + new Vector2(
-                    c * buttonStep, -r * buttonStep);
-                button.SetSize(new Vector2(buttonStep * 0.6f, buttonStep * 0.6f));
-                button.SetImage(SpritePath.UI.levelFrame);
-
-                // Add text object
-                GameObject textObject = new GameObject("Number");
-                Utils.SetParent(textObject, button.gameObject);
-                RectTransform rectTransform = textObject.AddComponent<RectTransform>();
-                rectTransform.sizeDelta = new Vector2(buttonStep * 0.6f, buttonStep * 0.6f);
-
-                Text text = textObject.AddComponent<Text>();
-                text.fontSize = 80;
-                text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
-                text.text = $"{id}";
-                text.alignment = TextAnchor.MiddleCenter;
-
-                Color textColor;
-                ColorUtility.TryParseHtmlString("#CCCCCC", out textColor);
-                text.color = textColor;
+                button.uv = topLeft + new Vector2(c * buttonStep, -r * buttonStep);
 
                 id++;
             }
