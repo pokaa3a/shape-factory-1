@@ -6,6 +6,7 @@ using UnityEngine;
 public partial class GamePlayPanel
 {
     UISelectLevelButton selectLevelButton;
+    UISaveLevelButton saveLevelButton;
 }
 
 public partial class GamePlayPanel
@@ -30,7 +31,11 @@ public partial class GamePlayPanel
 
     public void ShowPanel()
     {
+        // Level Selection Button
         selectLevelButton = new UISelectLevelButton();
+
+        // Save Level Button
+        saveLevelButton = new UISaveLevelButton();
 
         // Module selection panel
         InitializeModuleSelectionPanel();
@@ -40,7 +45,6 @@ public partial class GamePlayPanel
         bullpen.xy = new Vector2(0, -2f);
         bullpen.SetImage(SpritePath.UI.bullpen);
         bullpen.SetSize(new Vector2(500, 100));
-
     }
 
     private void InitializeModuleSelectionPanel()

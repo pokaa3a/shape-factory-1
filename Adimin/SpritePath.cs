@@ -9,6 +9,7 @@ public class SpritePath
         public const string levelFrame = "Sprites/UI/Level/LevelFrame";
         public const string returnButton = "Sprites/UI/Level/Return";
         public const string selectLevel = "Sprites/UI/GamePlayPanel/SelectLevel";
+        public const string saveLevel = "Sprites/UI/GamePlayPanel/SaveLevel";
         public const string bullpen = "Sprites/UI/GamePlayPanel/Bullpen";
     }
 

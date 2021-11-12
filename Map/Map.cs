@@ -25,6 +25,7 @@ public partial class Map
     public static Vector2 tileWH { get; private set; }
     public static Vector2 bottomLeftTileXy { get; private set; }
     public List<Tile> tiles = new List<Tile>();
+    public int levelId;
 }
 
 public partial class Map
@@ -95,6 +96,7 @@ public partial class Map
 
     public void CreateMapFromLevel(Level level)
     {
+        this.levelId = level.id;
         CleanMap();
         MakeModulesByConfig(level.modules);
     }
